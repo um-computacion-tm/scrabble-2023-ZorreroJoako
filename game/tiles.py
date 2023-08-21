@@ -1,12 +1,21 @@
 import random
 
-class TakeTilesException (Exception):
+class TakeTilesException(Exception):
     pass
 
-class PutTilesException (Exception):
+class PutTilesException(Exception):
     pass
 
-ALLTILES=98
+ALLTILES = 100
+
+class Wildcard:
+    def __init__(self):
+        self.letter = ''
+        self.value = 0
+
+    def select_letter(self, letter):
+        self.letter = letter.upper()
+        self.value = 1
 
 class Tile:
     def __init__(self, letter, value):
@@ -15,7 +24,7 @@ class Tile:
 
 class BagTile:
     def __init__(self):
-        self.tiles =  [Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1),
+        self.tiles = [Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1),
             Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1), Tile('E', 1),
             Tile('I', 1), Tile('I', 1), Tile('I', 1), Tile('I', 1), Tile('I', 1), Tile('I', 1),
             Tile('L', 1), Tile('L', 1), Tile('L', 1), Tile('L', 1),
@@ -43,33 +52,42 @@ class BagTile:
             Tile('RR', 8),
             Tile('X', 8),
             Tile('Z', 10)]
+        self.tiles.extend([Wildcard() for _ in range(2)])
         random.shuffle(self.tiles)
- 
-    def take_tiles(self,cantidad):
-        take_tiles=[]
+
+    def take_wildcard(self):
+        wildcard_tiles = [tile for tile in self.tiles if isinstance(tile, Wildcard)]
+        if wildcard_tiles:
+            wildcard = wildcard_tiles.pop()
+            self.tiles.remove(wildcard)
+            return wildcard
+        else:
+            return None
+    
+    def take_tiles(self, cantidad):
+        take_tiles = []
 
         try:
-            if cantidad>len(self.tiles):
+            if cantidad > len(self.tiles):
                 raise TakeTilesException
             else:
-                for i in range(cantidad):
+                for _ in range(cantidad):
                     take_tiles.append(self.tiles.pop())
                 return take_tiles
         
         except TakeTilesException:
-            print('No hay mas fichas para sacar de la bolsa')
+            print('No hay más fichas para sacar de la bolsa')
             return take_tiles
 
-    def put_tiles(self,tiles:list):
-
+    def put_tiles(self, tiles):
         try:
-            if len(tiles)+len(self.tiles)<=ALLTILES:
+            if len(tiles) + len(self.tiles) <= ALLTILES:
                 self.tiles.extend(tiles)
             else:
                 raise PutTilesException 
 
-        except PutTilesException :
-            print('No se pueden poner mas fichas en la bolsa')
+        except PutTilesException:
+            print('No se pueden poner más fichas en la bolsa')
 
     def tiles_leftover(self):
         return len(self.tiles)

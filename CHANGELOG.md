@@ -22,3 +22,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Isuues
 
 - Nothing
+
+### [0.0.2] - 2023-08-21
+
+### Added
+
+- Create WIldcard class and test
+- Create Take Wildcard
+
+### Changed
+
+- Modify Bagtile class to add Wildcard
+- Reorganize the code
+
+### Isuues
+
+- Wildcard class is not working correctly

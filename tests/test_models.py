@@ -31,6 +31,18 @@ class TestTileBag(unittest.TestCase):
         tilebag=BagTile()
         tilebag.put_tiles([Tile('A',1)])
         self.assertEqual(tilebag.tiles_leftover(),ALLTILES)
+
+class TestWildcardTile(unittest.TestCase):
+    def test_wildcard(self):
+        wildcard = Wildcard()
+        self.assertEqual(wildcard.letter, '')
+        self.assertEqual(wildcard.value, 0)
+
+    def test_select_wildcard_letter(self):
+        wildcard = Wildcard()
+        wildcard.select_letter('a')
+        self.assertEqual(wildcard.letter, 'A')
+        self.assertEqual(wildcard.value, 1)
         
 
 if __name__ == '__main__':
