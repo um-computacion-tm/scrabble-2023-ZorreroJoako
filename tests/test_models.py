@@ -30,20 +30,24 @@ class TestTileBag(unittest.TestCase):
     def test_put_too_much_tiles(self):
         tilebag=BagTile()
         tilebag.put_tiles([Tile('A',1)])
-        self.assertEqual(tilebag.tiles_leftover(),ALLTILES)
+        self.assertEqual(tilebag.tiles_leftover(),ALLTILES)        
 
-class TestWildcardTile(unittest.TestCase):
-    def test_wildcard(self):
-        wildcard = Wildcard()
-        self.assertEqual(wildcard.letter, '')
+class TestWildcard(unittest.TestCase):
+
+    def test_wildcard_value(self):
+        wildcard=Wildcard("",0)
+        self.assertEqual(wildcard.letter, "")
         self.assertEqual(wildcard.value, 0)
-
-    def test_select_wildcard_letter(self):
-        wildcard = Wildcard()
-        wildcard.select_letter('a')
-        self.assertEqual(wildcard.letter, 'A')
+    
+    def test_wildcard_choose(self):
+        wildcard=Wildcard("",0)
+        wildcard.wildcard_choose("A")
+        self.assertEqual(wildcard.letter, "A")
         self.assertEqual(wildcard.value, 1)
-        
 
+    def test_wildcard_choose_fail(self):
+        wildcard=Wildcard("",0)
+        self.assertRaises(TileNotFoundException, wildcard.wildcard_choose, "W")
+        
 if __name__ == '__main__':
     unittest.main()

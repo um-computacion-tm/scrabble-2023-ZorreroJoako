@@ -1,21 +1,30 @@
 import random
 
+
 class TakeTilesException(Exception):
     pass
 
 class PutTilesException(Exception):
     pass
 
+class TileNotFoundException(Exception):
+    pass
+
 ALLTILES = 100
 
 class Wildcard:
-    def __init__(self):
-        self.letter = ''
-        self.value = 0
-
-    def select_letter(self, letter):
-        self.letter = letter.upper()
-        self.value = 1
+    def __init__(self, letter, value):
+        self.letter = letter
+        self.value = value
+    
+    def wildcard_choose(self,letter_Wildcard):
+        for i in BagTile().tiles:
+            if i.letter == letter_Wildcard.upper():
+                self.letter = i.letter
+                self.value = i.value
+                break
+            else:
+                raise TileNotFoundException
 
 class Tile:
     def __init__(self, letter, value):
@@ -51,19 +60,12 @@ class BagTile:
             Tile('Ñ', 8),
             Tile('RR', 8),
             Tile('X', 8),
-            Tile('Z', 10)]
-        self.tiles.extend([Wildcard() for _ in range(2)])
+            Tile('Z', 10),Wildcard("",0 ), Wildcard("", 0)]
         random.shuffle(self.tiles)
 
-    def take_wildcard(self):
-        wildcard_tiles = [tile for tile in self.tiles if isinstance(tile, Wildcard)]
-        if wildcard_tiles:
-            wildcard = wildcard_tiles.pop()
-            self.tiles.remove(wildcard)
-            return wildcard
-        else:
-            return None
     
+
+
     def take_tiles(self, cantidad):
         take_tiles = []
 
