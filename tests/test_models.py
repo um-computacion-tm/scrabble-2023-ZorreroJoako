@@ -41,7 +41,7 @@ class TestWildcard(unittest.TestCase):
     
     def test_wildcard_choose(self):
         wildcard=Wildcard("",0)
-        wildcard.wildcard_choose("RR")
+        wildcard.wildcard_choose("rr")
         self.assertEqual(wildcard.letter, "RR")
         self.assertEqual(wildcard.value, 8)
 
