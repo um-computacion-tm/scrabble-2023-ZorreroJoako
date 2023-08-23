@@ -41,13 +41,14 @@ class TestWildcard(unittest.TestCase):
     
     def test_wildcard_choose(self):
         wildcard=Wildcard("",0)
-        wildcard.wildcard_choose("A")
-        self.assertEqual(wildcard.letter, "A")
-        self.assertEqual(wildcard.value, 1)
+        wildcard.wildcard_choose("RR")
+        self.assertEqual(wildcard.letter, "RR")
+        self.assertEqual(wildcard.value, 8)
 
     def test_wildcard_choose_fail(self):
         wildcard=Wildcard("",0)
-        self.assertRaises(TileNotFoundException, wildcard.wildcard_choose, "W")
-        
+        with self.assertRaises(TileNotFoundException):
+            wildcard.wildcard_choose("W")
+
 if __name__ == '__main__':
     unittest.main()

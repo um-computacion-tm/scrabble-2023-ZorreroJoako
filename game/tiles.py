@@ -12,25 +12,27 @@ class TileNotFoundException(Exception):
 
 ALLTILES = 100
 
-class Wildcard:
-    def __init__(self, letter, value):
-        self.letter = letter
-        self.value = value
-    
-    def wildcard_choose(self,letter_Wildcard):
-        for i in BagTile().tiles:
-            if i.letter == letter_Wildcard.upper():
-                self.letter = i.letter
-                self.value = i.value
-                break
-            else:
-                raise TileNotFoundException
 
 class Tile:
     def __init__(self, letter, value):
         self.letter = letter
         self.value = value
 
+class Wildcard(Tile):
+    def __init__(self, letter, value):
+        super().__init__(letter="", value=0)
+    
+    def wildcard_choose(self,letter_Wildcard):
+        for i in BagTile().tiles:
+            if i.letter==letter_Wildcard.upper() :
+                self.letter=i.letter
+                self.value=i.value
+                break
+        if self.letter=="":
+            raise TileNotFoundException
+            
+        
+        
 class BagTile:
     def __init__(self):
         self.tiles = [Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1),
