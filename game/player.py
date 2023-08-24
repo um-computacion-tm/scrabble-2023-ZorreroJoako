@@ -1,2 +1,3 @@
-class Player(self):
-    ...
+class Player:
+    def __init__(self):
+        self.tiles = []
