@@ -1,5 +1,5 @@
 import unittest
-from game.tiles import *
+from game.tilebag import *
 
 class TestTiles(unittest.TestCase):
     def test_tile(self):

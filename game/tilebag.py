@@ -30,9 +30,7 @@ class Wildcard(Tile):
                 break
         if self.letter=="":
             raise TileNotFoundException
-            
-        
-        
+                
 class BagTile:
     def __init__(self):
         self.tiles = [Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1), Tile('A', 1),
