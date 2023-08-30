@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Development]
 
+### [0.0.4] - 2023-08-29
+
+### Added
+
+- Create board, player and game classes and tests
+- Create in board, cell class and test
+
+### Changed
+
+- Separate the code in different files
+
+### Issues
+
+- Nothing
+
 ### [0.0.3] - 2023-08-22
 
 ### Added
