@@ -8,6 +8,6 @@ RUN apk add bash
 
 RUN git clone https://github.com/um-computacion-tm/scrabble-2023-ZorreroJoako.git
 
-RUN pip install -r requirements.txt
+RUN pip install coverage
 
 CMD [ "sh", "-c", "coverage run -m unittest && coverage report -m && python -m game.main " ]
