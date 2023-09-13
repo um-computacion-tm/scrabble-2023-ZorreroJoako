@@ -78,7 +78,6 @@ class BagTile:
                 return take_tiles
         
         except TakeTilesException:
-            print('No hay más fichas para sacar de la bolsa')
             return take_tiles
 
     def put_tiles(self, tiles):
@@ -89,7 +88,7 @@ class BagTile:
                 raise PutTilesException 
 
         except PutTilesException:
-            print('No se pueden poner más fichas en la bolsa')
+            return False
 
     def tiles_leftover(self):
         return len(self.tiles)
