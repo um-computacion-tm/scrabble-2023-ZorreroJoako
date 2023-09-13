@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Development]
 
+### [0.0.5] - 2023-09-06
+
+### Added
+
+-   Create scrabble class and tests
+-   Create players turns and tests
+-   Create players actions and tests
+
+### Changed
+
+-   Modify player class
+-   Separate cell class
+
+### Issues
+
+-   Nothing
+
 ### [0.0.4] - 2023-08-29
 
 ### Added

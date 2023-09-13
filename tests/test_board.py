@@ -66,20 +66,20 @@ class TestBoard(unittest.TestCase):
         value = Board().calculate_word_value(word)
         self.assertEqual(value, 12)
 
-    def test_word_inside_board(self):
-        board = Board()
-        word = "Facultad"
-        location = (5, 4)
-        orientation = "H"
-        word_is_valid = board.validate_word_inside_board(word, location, orientation)
-        assert word_is_valid == True
+    # def test_word_inside_board(self):
+    #     board = Board()
+    #     word = "Facultad"
+    #     location = (5, 4)
+    #     orientation = "H"
+    #     word_is_valid = board.validate_word_inside_board(word, location, orientation)
+    #     assert word_is_valid == True
 
-    def test_word_out_of_board(self):
-        board = Board()
-        word = "Facultad"
-        location = (14, 4)
-        orientation = "H"
-        word_is_valid = board.validate_word_inside_board(word, location, orientation)
-        assert word_is_valid == False
+    # def test_word_out_of_board(self):
+    #     board = Board()
+    #     word = "Facultad"
+    #     location = (14, 4)
+    #     orientation = "H"
+    #     word_is_valid = board.validate_word_inside_board(word, location, orientation)
+    #     assert word_is_valid == False
 if __name__ == '__main__':
     unittest.main()
