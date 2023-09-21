@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Development]
 
+### [0.0.6] - 2023-09-13
+
+### Added
+
+- Create validate word in board and test
+
+- Add Dockerfile
+
+### Changed
+
+- Modify board class
+
+- Modify tests in board
+
+- Modify tests in scrabble
+
+- Modify tests in cell
+
+### Issues
+
+- Nothing
+
 ### [0.0.5] - 2023-09-06
 
 ### Added
