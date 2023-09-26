@@ -9,3 +9,11 @@
 
 # Coverage
 [![Test Coverage](https://api.codeclimate.com/v1/badges/41aa92aea8dc9d4ec121/test_coverage)](https://codeclimate.com/github/um-computacion-tm/scrabble-2023-ZorreroJoako/test_coverage)
+
+# Data
+
+Alumno:Zorrero Joaquín
+
+Carrera: Ingeniería en Computacion
+
+Universidad de Mendoza

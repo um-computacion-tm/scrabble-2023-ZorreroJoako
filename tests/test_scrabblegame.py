@@ -27,6 +27,5 @@ class TestScrabbleGame(unittest.TestCase):
         scrabble_game.current_player = scrabble_game.players[2]
         scrabble_game.next_turn()
         self.assertEqual (scrabble_game.current_player, scrabble_game.players[0])
-
 if __name__ == '__main__':
     unittest.main()
