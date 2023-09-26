@@ -11,6 +11,11 @@ class TestMain(unittest.TestCase):
         players_count ==5
         with self.assertRaises(ValueError):
             Main().players_count()
+
+    def no_valid_number_players_count(self):
+        players_count ==5
+        with self.assertRaises(ValueError):
+            Main().players_count()
             
 if __name__ == '__main__':
     unittest.main()
