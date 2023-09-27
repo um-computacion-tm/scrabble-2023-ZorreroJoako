@@ -56,25 +56,3 @@ class Board:
         else:
             return False
     
-    # def validate_word_place_board_not_empty(self, word, location, orientation):
-    #     x, y = location
-    #     word_length = len(word)
-
-    #     Verifica que la ubicación esté dentro de los límites del tablero
-    #     if x < 0 or x >= 15 or y < 0 or y >= 15:
-    #         return False
-
-    #     Verifica que la palabra quepa en el tablero en la orientación especificada
-    #     if (orientation == "H" and y + word_length > 15) or (orientation == "V" and x + word_length > 15):
-    #         return False
-
-    #     Verifica que no haya letras en las celdas ocupadas por la palabra
-    #     for i in range(word_length):
-    #         if orientation == "H":
-    #             if self.grid[x][y + i] != ' ' and self.grid[x][y + i] != word[i]:
-    #                 return False
-    #         elif orientation == "V":
-    #             if self.grid[x + i][y] != ' ' and self.grid[x + i][y] != word[i]:
-    #                 return False
-
-    #     return True

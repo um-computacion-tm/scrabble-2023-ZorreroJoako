@@ -149,10 +149,12 @@ class TestBoard(unittest.TestCase):
         board.grid[9][7].add_letter(Tile('S', 1)) 
         board.grid[10][7].add_letter(Tile('A', 1)) 
         word = "Facultad"
-        location = (5, 7)
+        location = (8, 6)
         orientation = "H"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         assert word_is_valid == False
+    
+    
 
 if __name__ == '__main__':
     unittest.main()
