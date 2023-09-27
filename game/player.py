@@ -16,5 +16,5 @@ class Player:
             self.tiles[i]=new_tiles.pop(0)
         return old_tiles
 
-
+    # def has_letters(self,word):
     
