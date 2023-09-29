@@ -176,6 +176,23 @@ class TestBoard(unittest.TestCase):
         word = "asdfghj"
         self.assertEqual(board.validate_words_with_rae(word), False)
 
+    def test_valid_accent_word(self):
+        board = Board()
+        word = "Árbol"
+        self.assertEqual(board.words_with_accent(word), 'ARBOL')
+
+    def test_valid_accent_rest_of_words(self):
+        board = Board()
+        word1 = "Éste"
+        word2 = "ahí"
+        word3 = "cocción"
+        word4 = "última"
+        self.assertEqual(board.words_with_accent(word1), 'ESTE')
+        self.assertEqual(board.words_with_accent(word2), 'AHI')
+        self.assertEqual(board.words_with_accent(word3), 'COCCION')
+        self.assertEqual(board.words_with_accent(word4), 'ULTIMA')
+
+
 
 if __name__ == '__main__':
     unittest.main()

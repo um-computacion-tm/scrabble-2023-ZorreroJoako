@@ -87,4 +87,19 @@ class Board:
                 else:
                     return False
 
-    
+    def words_with_accent(self, word):
+        word = word.lower()
+        for letter in word:
+            if letter == 'á':
+                word = word.replace('á', 'a')
+            elif letter == 'é':
+                word = word.replace('é', 'e')
+            elif letter == 'í':
+                word = word.replace('í', 'i')
+            elif letter == 'ó':
+                word = word.replace('ó', 'o')
+            elif letter == 'ú':
+                word = word.replace('ú', 'u')
+        return word.upper()
+
+        

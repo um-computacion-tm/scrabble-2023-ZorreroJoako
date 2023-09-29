@@ -17,4 +17,3 @@ class Player:
         return old_tiles
 
     # def has_letters(self,word):
-    
