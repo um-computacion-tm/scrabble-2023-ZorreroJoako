@@ -144,17 +144,55 @@ class TestBoard(unittest.TestCase):
 
     def test_place_word_not_empty_board_horizontal_fine(self):
         board = Board()
-        board.grid[7][7].add_letter(Tile('C', 1))
-        board.grid[8][7].add_letter(Tile('A', 1)) 
-        board.grid[9][7].add_letter(Tile('S', 1)) 
-        board.grid[10][7].add_letter(Tile('A', 1)) 
-        word = "Facultad"
-        location = (8, 6)
+        board.grid[7][7].letter = Tile('C',3)
+        board.grid[8][7].letter = Tile('A',1)
+        board.grid[9][7].letter = Tile('S',6)
+        board.grid[10][7].letter = Tile('A',1) 
+        word = "FACULTAD"
+        location = (7, 5)
         orientation = "H"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
-        assert word_is_valid == False
+        self.assertEqual(word_is_valid, True)
     
+    def test_place_word_not_empty_board_vertical_fine(self):
+        board = Board()
+        board.grid[7][7].letter = Tile('C',3)
+        board.grid[7][8].letter = Tile('A',1)
+        board.grid[7][9].letter = Tile('S',6)
+        board.grid[7][10].letter = Tile('A',1) 
+        word = "FACULTAD"
+        location = (5, 7)
+        orientation = "V"
+        word_is_valid = board.validate_word_place_board(word, location, orientation)
+        self.assertEqual(word_is_valid, True)
     
+    def test_valid_word_with_rae(self):
+        board = Board()
+        word = "FACULTAD"
+        self.assertEqual(board.validate_words_with_rae(word), True)
+    
+    def test_invalid_word_with_rae(self):
+        board = Board()
+        word = "asdfghj"
+        self.assertEqual(board.validate_words_with_rae(word), False)
+
+    def test_valid_accent_word(self):
+        board = Board()
+        word = "Árbol"
+        self.assertEqual(board.words_with_accent(word), 'ARBOL')
+
+    def test_valid_accent_rest_of_words(self):
+        board = Board()
+        word1 = "Éste"
+        word2 = "ahí"
+        word3 = "cocción"
+        word4 = "última"
+        self.assertEqual(board.words_with_accent(word1), 'ESTE')
+        self.assertEqual(board.words_with_accent(word2), 'AHI')
+        self.assertEqual(board.words_with_accent(word3), 'COCCION')
+        self.assertEqual(board.words_with_accent(word4), 'ULTIMA')
+
+
 
 if __name__ == '__main__':
     unittest.main()

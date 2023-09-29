@@ -1,6 +1,6 @@
 import unittest
 from game.player import *
-
+from game.tilebag import *
 class TestPlayer(unittest.TestCase):
     def test_init(self):
         player_1 = Player('Elio', 2)
@@ -22,6 +22,9 @@ class TestPlayer(unittest.TestCase):
         old_tiles=player.change_tiles(old_tiles_index,new_tiles)
         self.assertEqual(old_tiles,['A','B','C'])
         self.assertEqual(player.tiles,['E','F','G','D'])
+   
+    # def test_validate_user_has_letters(self):
+        
 
 if __name__ == '__main__':
     unittest.main()
