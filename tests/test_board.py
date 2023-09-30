@@ -2,6 +2,8 @@ import unittest
 from game.board import *
 from game.tilebag import Tile
 from game.cell  import Cell
+from unittest.mock import patch
+
 
 
 class TestBoard(unittest.TestCase):
@@ -66,28 +68,36 @@ class TestBoard(unittest.TestCase):
         value = Board().calculate_word_value(word)
         self.assertEqual(value, 12)
 
-    def test_len_of_word_in_board_x(self):
+    @patch('game.board.dle.search_by_word')
+    def test_len_of_word_in_board_x(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board= Board()
         word='facultad'
         location=(7,4)
         orientation='H'
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
 
-    def test_len_of_word_in_board_y(self):
+    @patch('game.board.dle.search_by_word')
+    def test_len_of_word_in_board_y(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board= Board()
         word='facultad'
         location=(7,4)
         orientation='V'
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
 
-    def test_len_of_word_out_of_board_x(self):
+    @patch('game.board.dle.search_by_word')
+    def test_len_of_word_out_of_board_x(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board= Board()
         word='facultad'
         location=(10,5)
         orientation='H'
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
 
-    def test_len_of_word_out_of_board_y(self):
+    @patch('game.board.dle.search_by_word')
+    def test_len_of_word_out_of_board_y(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board= Board()
         word='facultad'
         location=(5,10)
@@ -104,35 +114,45 @@ class TestBoard(unittest.TestCase):
         board.grid[7][7].add_letter(Tile('C', 1))
         self.assertEqual(board.board_empty(),False)
 
-    def test_place_word_empty_board_horizontal_fine(self):
+    @patch('game.board.dle.search_by_word')
+    def test_place_word_empty_board_horizontal_fine(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         word = "Facultad"
         location = (7, 4)
         orientation = "H"
         self.assertEqual(board.validate_word_place_board(word, location, orientation),True)
 
-    def test_place_word_empty_board_horizontal_wrong(self):
+    @patch('game.board.dle.search_by_word')
+    def test_place_word_empty_board_horizontal_wrong(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         word = "Facultad"
         location = (2, 4)
         orientation = "H"
         self.assertEqual(board.validate_word_place_board(word, location, orientation),False)
 
-    def test_place_word_empty_board_vertical_fine(self):
+    @patch('game.board.dle.search_by_word')
+    def test_place_word_empty_board_vertical_fine(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         word = "Facultad"
         location = (4, 7)
         orientation = "V"
         self.assertEqual(board.validate_word_place_board(word, location, orientation),True)
 
-    def test_place_word_empty_board_vertical_wrong(self):
+    @patch('game.board.dle.search_by_word')
+    def test_place_word_empty_board_vertical_wrong(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         word = "Facultad"
         location = (2, 4)
         orientation = "V"
         self.assertEqual(board.validate_word_place_board(word, location, orientation),False)
     
-    def test_invalidate_word_place_board(self):
+    @patch('game.board.dle.search_by_word')
+    def test_invalidate_word_place_board(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         board.grid[7][7].add_letter(Tile('C', 1))
         word = "Facultad"
@@ -141,8 +161,9 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.validate_word_place_board(word, location, orientation),False)
     
     
-
-    def test_place_word_not_empty_board_horizontal_fine(self):
+    @patch('game.board.dle.search_by_word')
+    def test_place_word_not_empty_board_horizontal_fine(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         board.grid[7][7].letter = Tile('C',3)
         board.grid[8][7].letter = Tile('A',1)
@@ -154,7 +175,9 @@ class TestBoard(unittest.TestCase):
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         self.assertEqual(word_is_valid, True)
     
-    def test_place_word_not_empty_board_vertical_fine(self):
+    @patch('game.board.dle.search_by_word')
+    def test_place_word_not_empty_board_vertical_fine(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         board.grid[7][7].letter = Tile('C',3)
         board.grid[7][8].letter = Tile('A',1)
@@ -166,12 +189,16 @@ class TestBoard(unittest.TestCase):
         word_is_valid = board.validate_word_place_board(word, location, orientation)
         self.assertEqual(word_is_valid, True)
     
-    def test_valid_word_with_rae(self):
+    @patch('game.board.dle.search_by_word')
+    def test_valid_word_with_rae(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'facultad | Definición | Diccionario de la lengua española | RAE - ASALE'
         board = Board()
         word = "FACULTAD"
         self.assertEqual(board.validate_words_with_rae(word), True)
-    
-    def test_invalid_word_with_rae(self):
+
+    @patch('game.board.dle.search_by_word')
+    def test_invalid_word_with_rae(self,mock_search_by_word):
+        mock_search_by_word.return_value.title = 'Diccionario de la lengua española | Edición del Tricentenario | RAE - ASALE'
         board = Board()
         word = "asdfghj"
         self.assertEqual(board.validate_words_with_rae(word), False)
