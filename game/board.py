@@ -102,4 +102,12 @@ class Board:
                 word = word.replace('ú', 'u')
         return word.upper()
 
+    def show_board(self):
+        for row in self.grid:
+            for cell in row:
+                if cell.letter is None:
+                    print(cell.multiplier, end=' ')
+                else:
+                    print(cell.letter.letter, end=' ')
+            print()
         

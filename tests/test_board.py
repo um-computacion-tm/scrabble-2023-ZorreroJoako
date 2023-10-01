@@ -218,7 +218,39 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.words_with_accent(word2), 'AHI')
         self.assertEqual(board.words_with_accent(word3), 'COCCION')
         self.assertEqual(board.words_with_accent(word4), 'ULTIMA')
-
+    
+    def test_show_board_empty(self):
+        board = Board()
+        self.assertEqual(board.show_board(), None)
+        
+    def test_show_board(self):
+        board = Board()
+        board.grid[7][7].add_letter(Tile('C', 1))
+        board.grid[8][7].add_letter(Tile('A', 1))
+        board.grid[9][7].add_letter(Tile('S', 2))
+        board.grid[10][7].add_letter(Tile('A', 1))
+        board.grid[11][7].add_letter(Tile('R', 1))
+        board.grid[12][7].add_letter(Tile('O', 1))
+        board.grid[13][7].add_letter(Tile('N', 1))
+        board.grid[14][7].add_letter(Tile('E', 1))
+        board.grid[7][7].multiplier_type = "word"
+        board.grid[7][7].multiplier = 2
+        board.grid[7][8].multiplier_type = "letter"
+        board.grid[7][8].multiplier = 2
+        board.grid[7][9].multiplier_type = "letter"
+        board.grid[7][9].multiplier = 2
+        board.grid[7][10].multiplier_type = "letter"
+        board.grid[7][10].multiplier = 2
+        board.grid[7][11].multiplier_type = "letter"
+        board.grid[7][11].multiplier = 2
+        board.grid[7][12].multiplier_type = "letter"
+        board.grid[7][12].multiplier = 2
+        board.grid[7][13].multiplier_type = "letter"
+        board.grid[7][13].multiplier = 2
+        board.grid[7][14].multiplier_type = "letter"
+        board.grid[7][14].multiplier = 2
+        board.show_board()
+        self.assertEqual(board.show_board(), None)
 
 
 if __name__ == '__main__':
