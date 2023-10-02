@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Development]
 
+### [0.0.7] - 2023-10-02
+
+### Added
+
+- Create validate cross words and his tests
+- Create validate words with rae and his tests
+- Create validate accent words with his tests
+
+### Changed
+
+- Modify board tests
+- Fix main testsmock_search_by_word
+- Mock input in board test
+- Update README.md
+- Upgrade show board class and test
+
+### Issues
+
+- Nothing
+
 ### [0.0.6] - 2023-09-13
 
 ### Added

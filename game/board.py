@@ -102,4 +102,20 @@ class Board:
                 word = word.replace('ú', 'u')
         return word.upper()
 
-        
+    def show_board(self):
+        print (" ")
+        print("", end=' ')
+        x = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+        y = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
+        for idx, label in enumerate(x):
+            print(f"{label} ", end=' ')
+        print()
+
+        for i, row in enumerate(self.grid):
+            print(f"{y[i]}  ", end=' ')
+            for cell in row:
+                if cell.letter is None:
+                    print('- ', end=' ')
+                else:
+                    print(f'{cell.letter.letter} ', end=' ')
+            print()
