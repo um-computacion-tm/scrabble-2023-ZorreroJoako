@@ -119,3 +119,4 @@ class Board:
                 else:
                     print(f'{cell.letter.letter} ', end=' ')
             print()
+        print()
