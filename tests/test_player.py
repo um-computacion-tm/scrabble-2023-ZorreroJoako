@@ -44,6 +44,16 @@ class TestPlayer(unittest.TestCase):
         splited_word = player.split_word('hierro')
         self.assertEqual(splited_word, ['H', 'I', 'E','RR','O'])
 
+    def test_search_word_invalid(self):
+        player = Player()
+        player.add_tiles(['A','B','C','D'])
+        self.assertFalse(player.search('CASA'))
+    
+    def test_search_word_valid(self):
+        player = Player()
+        player.add_tiles(['A','B','C','D'])
+        self.assertTrue(player.search('AB'))
+        
 
 if __name__ == '__main__':
     unittest.main()

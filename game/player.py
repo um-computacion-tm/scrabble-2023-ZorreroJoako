@@ -34,3 +34,13 @@ class Player:
                 result_word.append(word[i])
                 i += 1
         return result_word
+
+    def search(self, word):
+        word = self.split_word(word)
+        tiles = self.tiles.copy()
+        for letter in word:
+            if letter in tiles:
+                tiles.remove(letter)
+            else:
+                return False
+        return True
