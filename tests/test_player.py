@@ -23,7 +23,36 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(old_tiles,['A','B','C'])
         self.assertEqual(player.tiles,['E','F','G','D'])
    
-    # def test_validate_user_has_letters(self):
+    
+    def test_split_word(self):
+        player = Player()
+        splited_word = player.split_word('CASA')
+        self.assertEqual(splited_word, ['C','A','S','A'])
+
+    def test_split_word_with_ll(self):
+        player = Player()
+        splited_word = player.split_word('llorar')
+        self.assertEqual(splited_word, ['LL','O','R','A', 'R'])
+
+    def test_split_word_with_ch(self):
+        player = Player()
+        splited_word = player.split_word('chocar')
+        self.assertEqual(splited_word, ['CH','O','C','A','R'])
+
+    def test_split_word_with_rr(self):
+        player = Player()
+        splited_word = player.split_word('hierro')
+        self.assertEqual(splited_word, ['H', 'I', 'E','RR','O'])
+
+    def test_search_word_invalid(self):
+        player = Player()
+        player.add_tiles(['A','B','C','D'])
+        self.assertFalse(player.search('CASA'))
+    
+    def test_search_word_valid(self):
+        player = Player()
+        player.add_tiles(['A','B','C','D'])
+        self.assertTrue(player.search('AB'))
         
 
 if __name__ == '__main__':

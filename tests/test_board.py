@@ -245,6 +245,6 @@ class TestBoard(unittest.TestCase):
         board.grid[10][8].letter = Tile('O',1)
         board.grid[11][8].letter = Tile('L',1)
         board.show_board()
-
+    
 if __name__ == '__main__':
     unittest.main()

@@ -16,4 +16,31 @@ class Player:
             self.tiles[i]=new_tiles.pop(0)
         return old_tiles
 
-    # def has_letters(self,word):
+    def split_word(self,word):
+        word = word.upper()
+        replacements = {'CH': '1', 'LL': '2', 'RR': '3'}
+        for key, value in replacements.items():
+            word = word.replace(key, value)
+        result_word = []
+        i = 0
+        while i < len(word):
+            if word[i] in ('1', '2', '3'):
+                for key, value in replacements.items():
+                    if value == word[i]:
+                        result_word.append(key)
+                        break
+                i += 1
+            else:
+                result_word.append(word[i])
+                i += 1
+        return result_word
+
+    def search(self, word):
+        word = self.split_word(word)
+        tiles = self.tiles.copy()
+        for letter in word:
+            if letter in tiles:
+                tiles.remove(letter)
+            else:
+                return False
+        return True
