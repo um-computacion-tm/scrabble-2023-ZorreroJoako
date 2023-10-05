@@ -120,3 +120,16 @@ class Board:
                     print(f'{cell.letter.letter} ', end=' ')
             print()
         print()
+    
+    def put_word(self,word, location, orientation):
+        word = word.upper()
+        if self.validate_word_place_board(word, location, orientation):
+            if orientation == 'H':
+                for i in range(len(word)):
+                    self.grid[location[0]][location[1]+i].letter = word[i]
+            else:
+                for i in range(len(word)):
+                    self.grid[location[0]+i][location[1]].letter = word[i]
+            return True
+        else:
+            return False

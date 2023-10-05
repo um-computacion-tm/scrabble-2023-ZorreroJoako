@@ -51,9 +51,10 @@ class TestPlayer(unittest.TestCase):
     
     def test_search_word_valid(self):
         player = Player()
-        player.add_tiles(['A','B','C','D'])
-        self.assertTrue(player.search('AB'))
+        player.add_tiles(['A','B','C','S', 'A'])
+        self.assertTrue(player.search('CASA'))
         
+    
 
 if __name__ == '__main__':
     unittest.main()
