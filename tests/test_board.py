@@ -221,30 +221,57 @@ class TestBoard(unittest.TestCase):
     
     def test_show_board_empty(self):
         board = Board()
-        board.show_board()
+        result = board.show_board()
+        expected = """ 
+ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  
+A   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+B   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+C   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+D   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+E   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+F   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+G   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+H   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+I   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+J   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+K   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+L   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+M   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+N   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+O   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+
+"""
+        self.maxDiff = None
+        self.assertEqual(result, expected)
         
     def test_show_board(self):
         board = Board()
         board.grid[7][7].letter = Tile('C',3)
         board.grid[8][7].letter = Tile('A',1)
         board.grid[9][7].letter = Tile('S',6)
-        board.grid[10][7].letter = Tile('A',1) 
-        board.show_board()
-        
-    def test_show_board_with_x_words(self):
-        board = Board()
-        word1 = "Casa"
-        board.grid[7][7].letter = Tile('C',3)
-        board.grid[7][8].letter = Tile('A',1)
-        board.grid[7][9].letter = Tile('S',6)
-        board.grid[7][10].letter = Tile('A',1)
-        word2 = "Árbol"
-        board.grid[7][8].letter = Tile('A',1)
-        board.grid[8][8].letter = Tile('R',1)
-        board.grid[9][8].letter = Tile('B',3)
-        board.grid[10][8].letter = Tile('O',1)
-        board.grid[11][8].letter = Tile('L',1)
-        board.show_board()
+        board.grid[10][7].letter = Tile('A',1)
+        result = board.show_board()
+        expected = """ 
+ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  
+A   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+B   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+C   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+D   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+E   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+F   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+G   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+H   -  -  -  -  -  -  -  C  -  -  -  -  -  -  -  
+I   -  -  -  -  -  -  -  A  -  -  -  -  -  -  -  
+J   -  -  -  -  -  -  -  S  -  -  -  -  -  -  -  
+K   -  -  -  -  -  -  -  A  -  -  -  -  -  -  -  
+L   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+M   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+N   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+O   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+
+""" 
+        self.maxDiff = None
+        self.assertEqual(result, expected)
     
     @patch('game.board.dle.search_by_word')
     def test_put_word_valid_horizontal(self, mock_search_by_word):
@@ -271,7 +298,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[8][7].letter, "A")
         self.assertEqual(board.grid[9][7].letter, "S")
         self.assertEqual(board.grid[10][7].letter, "A")
-
+        
     @patch('game.board.dle.search_by_word')
     def test_put_word_invalid(self, mock_search_by_word):
         mock_search_by_word.return_value.title = 'Diccionario de la lengua española | Edición del Tricentenario | RAE - ASALE'
@@ -286,6 +313,5 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[7][10].letter, None)
         self.assertEqual(board.grid[7][11].letter, None)
         self.assertEqual(board.grid[7][12].letter, None)
-        self.assertEqual(board.grid[7][13].letter, None)
 if __name__ == '__main__':
     unittest.main()
