@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Development]
 
+### [0.0.8] - 2023-10-05
+
+### Added
+
+- Create search word and his tests
+
+- Create split word an his tests
+
+- Creat put word and his tests
+
+### Changed
+
+- Modify show board class
+
+### Issues
+
+- Nothing
+
 ### [0.0.7] - 2023-10-02
 
 ### Added

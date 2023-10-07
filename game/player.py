@@ -44,3 +44,9 @@ class Player:
             else:
                 return False
         return True
+
+    def view_lectern(self):
+        lectern = '                     ATRIL\n\nLetras ->  |'
+        for letter in self.tiles:
+            lectern += ' ' + letter + ' |'
+        return lectern
