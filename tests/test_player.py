@@ -54,7 +54,13 @@ class TestPlayer(unittest.TestCase):
         player.add_tiles(['A','B','C','S', 'A'])
         self.assertTrue(player.search('CASA'))
         
+    def test_view_lectern(self):
+        player = Player()
+        player.add_tiles(['A','B','C','D'])
+        self.assertEqual(player.view_lectern(), '                     ATRIL\n\nLetras ->  | A | B | C | D |')
     
-
+    def test_view_lectern_empty(self):
+        player = Player()
+        self.assertEqual(player.view_lectern(), '                     ATRIL\n\nLetras ->  |')
 if __name__ == '__main__':
     unittest.main()
