@@ -23,3 +23,15 @@ class ScrabbleGame:
         else:
             index=self.players.index(self.current_player)+1
             self.current_player=self.players[index]
+
+    def end_game(self):
+        if self.tilebag.tiles == []:
+            for player in self.players:
+                if player.tiles == []:
+                    self.game_over = True
+                else:
+                    self.game_over = False
+                    break
+        else:
+            self.game_over = False
+        return self.game_over
