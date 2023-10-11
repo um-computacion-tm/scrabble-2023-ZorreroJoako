@@ -27,22 +27,6 @@ class TestMain(unittest.TestCase):
     4) Ver Puntuaciones
     Seleccion: ''')
 
-    def test_menu_actions(self):
-        main = Main()
-        self.assertEqual(main.menu('actions'), '''    Acciones
-    1) Colocar palabra
-    2) Pasar turno
-    3) Cambiar fichas
-    4) Salir
-    Seleccion: ''')
-
-    def test_menu_scores(self):
-        main = Main()
-        self.assertEqual(main.menu('scores'), '''    Puntuaciones
-    1) Ver puntuaciones
-    2) Salir
-    Seleccion: ''')
-
     def test_menu_board(self):
         main = Main()
         self.assertEqual(main.menu('board'), '''    Tablero
@@ -57,6 +41,29 @@ class TestMain(unittest.TestCase):
     2) Salir
     Seleccion: ''')
 
+    def test_menu_actions(self):
+        main = Main()
+        self.assertEqual(main.menu('actions'), '''    Acciones
+    1) Colocar palabra
+    2) Pasar turno
+    3) Cambiar fichas
+    4) Salir
+    Seleccion: ''')
+
+    def test_menu_put_word(self):
+        main = Main()
+        self.assertEqual(main.menu('put_word'), '''    Colocar palabra
+    1) Colocar palabra
+    2) Salir
+    Seleccion: ''')
+
+    def test_menu_next_turn(self):
+        main = Main()
+        self.assertEqual(main.menu('next_turn'), '''    Pasar turno
+    1) Pasar turno
+    2) Salir
+    Seleccion: ''')
+
     def test_menu_change_tiles(self):
         main = Main()
         self.assertEqual(main.menu('change_tiles'), '''    Cambiar fichas
@@ -64,5 +71,14 @@ class TestMain(unittest.TestCase):
     2) Salir
     Seleccion: ''')
         
+    
+
+    def test_menu_scores(self):
+        main = Main()
+        self.assertEqual(main.menu('scores'), '''    Puntuaciones
+    1) Ver puntuaciones
+    2) Salir
+    Seleccion: ''')
+
 if __name__ == '__main__':
     unittest.main()

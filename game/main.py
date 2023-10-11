@@ -23,18 +23,6 @@ class Main():
     3) Ver Acciones
     4) Ver Puntuaciones
     Seleccion: '''
-        elif menu == 'actions':
-            return '''    Acciones
-    1) Colocar palabra
-    2) Pasar turno
-    3) Cambiar fichas
-    4) Salir
-    Seleccion: '''  
-        elif menu == 'scores':
-            return '''    Puntuaciones
-    1) Ver puntuaciones
-    2) Salir
-    Seleccion: '''
         elif menu == 'board':
             return '''    Tablero
     1) Ver tablero
@@ -45,11 +33,36 @@ class Main():
     1) Ver atril
     2) Salir
     Seleccion: '''
+        elif menu == 'actions':
+            return '''    Acciones
+    1) Colocar palabra
+    2) Pasar turno
+    3) Cambiar fichas
+    4) Salir
+    Seleccion: '''  
+        elif menu == 'put_word':
+            return '''    Colocar palabra
+    1) Colocar palabra
+    2) Salir
+    Seleccion: '''
+        elif menu == 'next_turn':
+            return '''    Pasar turno
+    1) Pasar turno
+    2) Salir
+    Seleccion: '''
         elif menu == 'change_tiles':
             return '''    Cambiar fichas
     1) Cambiar fichas
     2) Salir
     Seleccion: '''
+        elif menu == 'scores':
+            return '''    Puntuaciones
+    1) Ver puntuaciones
+    2) Salir
+    Seleccion: '''
+        
+        
+        
         
         # scrabble_game = ScrabbleGame(players_count=players_count)
         # print ("Cantidad de jugadores: ", len(scrabble_game.players))

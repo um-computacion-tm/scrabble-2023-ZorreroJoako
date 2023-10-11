@@ -5,8 +5,7 @@ from pyrae import dle
 class Board:
     def __init__(self):
         self.grid = [[ Cell(1, '') for _ in range(15) ]
-        for _ in range(15)]
-    
+    for _ in range(15)]
     def validate_words_with_rae(self, word):
         valid=dle.search_by_word(word)
         if word.lower() in valid.title:
