@@ -50,3 +50,12 @@ class Player:
         for letter in self.tiles:
             lectern += ' ' + letter + ' |'
         return lectern
+
+    def view_lectern_with_index(self):
+        lectern = '                     ATRIL\n\nLetras ->  |'
+        for i in range(len(self.tiles)):
+            lectern += ' ' + str(i) + ' |'
+        lectern += '\n           |'
+        for letter in self.tiles:
+            lectern += ' ' + letter + ' |'
+        return lectern
