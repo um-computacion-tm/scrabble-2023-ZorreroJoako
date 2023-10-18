@@ -4,8 +4,28 @@ from game.cell import Cell
 from pyrae import dle
 class Board:
     def __init__(self):
-        self.grid = [[ Cell(1, '') for _ in range(15) ]
-    for _ in range(15)]
+        self.grid = [[ Cell(1, '') for _ in range(15) ]for _ in range(15)]
+        
+        WORD_MULTIPLIERS = ((0, 0), (7, 0), (0, 7), (7, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14), (1, 1), (2, 2), (3, 3), (4, 4), (10, 10), (11, 11), (12, 12), (13, 13), (1, 13), (2, 12), (3, 11), (4, 10), (10, 4), (11, 3), (12, 2), (13, 1))
+        LETTER_MULTIPLIERS = ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9),(0, 3), (0, 11), (2, 6), (2, 8), (3, 0), (3, 7), (3, 14), (6, 2), (6, 6), (6, 8), (6, 12), (7, 3), (7, 11), (8, 2), (8, 6), (8, 8), (8, 12), (11, 0), (11, 7), (11, 14), (12, 6), (12, 8), (14, 3), (14, 11))
+
+        for row in range(len(self.grid)):
+            for col in range(len(self.grid[row])):
+                if (row, col) in LETTER_MULTIPLIERS:
+                    if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)):
+                        multiplier = 3
+                    else:
+                        multiplier = 2
+                    self.grid[row][col] = Cell(multiplier, 'letter', True)
+                elif (row, col) in WORD_MULTIPLIERS:
+                    if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
+                        multiplier = 3
+                    else:
+                        multiplier = 2
+                    self.grid[row][col] = Cell(multiplier, 'word', True)
+                else:
+                    self.grid[row][col] = Cell(1, '', False)
+
     def validate_words_with_rae(self, word):
         valid=dle.search_by_word(word)
         if word.lower() in valid.title:
@@ -114,11 +134,19 @@ class Board:
             view += f"{y[i]}   "
             for cell in row:
                 if cell.letter is None:
-                    view += '-  '
+                    if cell.multiplier_type == 'letter' and cell.multiplier == 3:
+                        view += f"3L|"
+                    elif cell.multiplier_type == 'letter' and cell.multiplier == 2:
+                        view += f"2L|"
+                    elif cell.multiplier_type == 'word' and cell.multiplier == 3:
+                        view += f"3W|"
+                    elif cell.multiplier_type == 'word' and cell.multiplier == 2:
+                        view += f"2W|"
+                    else:
+                        view += f"  |"
                 else:
-                    view += f'{cell.letter.letter}  '
+                    view += f"{cell.letter.letter} |"
             view += "\n"
-        view += "\n"
         return view
 
     
@@ -134,3 +162,5 @@ class Board:
             return True
         else:
             return False
+        
+    
