@@ -53,5 +53,16 @@ class TestScrabbleGame(unittest.TestCase):
         scrabble_game.players[2].tiles = []
         self.assertFalse(scrabble_game.end_game())
 
+    def test_add_tiles_to_player(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.add_tiles_to_player(scrabble_game.players[0],['A','B','C'])
+        self.assertEqual(scrabble_game.players[0].tiles,['A','B','C'])
+    
+    def test_change_tiles(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.players[0].tiles = ['A','B','C']
+        scrabble_game.change_tiles(scrabble_game.players[0],[0,1,2],['D','E','F'])
+        self.assertEqual(scrabble_game.players[0].tiles,['D','E','F'])
+    
 if __name__ == '__main__':
     unittest.main()

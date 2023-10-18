@@ -24,6 +24,12 @@ class ScrabbleGame:
             index=self.players.index(self.current_player)+1
             self.current_player=self.players[index]
 
+    def add_tiles_to_player(self, player, tiles):
+        player.add_tiles(tiles)
+
+    def change_tiles(self, player, old_tiles_index, new_tiles):
+        player.change_tiles(old_tiles_index, new_tiles)
+
     def end_game(self):
         if self.tilebag.tiles == []:
             for player in self.players:
