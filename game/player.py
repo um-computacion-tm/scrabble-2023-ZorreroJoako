@@ -13,11 +13,8 @@ class Player:
         old_tiles=[]
         for i in old_tiles_index:
             old_tiles.append(self.tiles[i])
-        for i in old_tiles_index:
-            self.tiles.remove(self.tiles[i])
-        self.add_tiles(new_tiles)
+            self.tiles[i]=new_tiles.pop(0)
         return old_tiles
-        
 
     def split_word(self,word):
         word = word.upper()
