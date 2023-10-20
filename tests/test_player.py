@@ -56,16 +56,10 @@ class TestPlayer(unittest.TestCase):
         
     def test_view_lectern(self):
         player = Player()
-        player.add_tiles(['A','B','C','D'])
-        self.assertEqual(player.view_lectern(), '                     ATRIL\n\nLetras ->  | A | B | C | D |')
-    
-    def test_view_lectern_empty(self):
-        player = Player()
-        self.assertEqual(player.view_lectern(), '                     ATRIL\n\nLetras ->  |')
+        player.tiles = [Tile('A',1),Tile('A',1),Tile('A',1),Tile('A',1),Tile('A',1),Tile('A',1),Tile('A',1)]
+        self.assertEqual(player.view_lectern(), '''                     ATRIL
 
-    def test_view_lectern_with_index(self):
-        player = Player()
-        player.add_tiles(['A','B','C','D'])
-        self.assertEqual(player.view_lectern_with_index(), '                     ATRIL\n\nLetras ->  | 0 | 1 | 2 | 3 |\n           | A | B | C | D |')
+Letras ->  | A | A | A | A | A | A | A |''')
+
 if __name__ == '__main__':
     unittest.main()

@@ -13,8 +13,11 @@ class Player:
         old_tiles=[]
         for i in old_tiles_index:
             old_tiles.append(self.tiles[i])
-            self.tiles[i]=new_tiles.pop(0)
+        for i in old_tiles_index:
+            self.tiles.remove(self.tiles[i])
+        self.add_tiles(new_tiles)
         return old_tiles
+        
 
     def split_word(self,word):
         word = word.upper()
@@ -45,17 +48,13 @@ class Player:
                 return False
         return True
 
+
     def view_lectern(self):
         lectern = '                     ATRIL\n\nLetras ->  |'
-        for letter in self.tiles:
-            lectern += ' ' + letter + ' |'
+        for tile in self.tiles:
+            lectern += ' ' + tile.letter + ' |'
         return lectern
 
-    def view_lectern_with_index(self):
-        lectern = '                     ATRIL\n\nLetras ->  |'
-        for i in range(len(self.tiles)):
-            lectern += ' ' + str(i) + ' |'
-        lectern += '\n           |'
-        for letter in self.tiles:
-            lectern += ' ' + letter + ' |'
-        return lectern
+    
+    
+    
