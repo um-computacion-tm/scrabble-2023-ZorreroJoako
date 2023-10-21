@@ -30,8 +30,18 @@ class ScrabbleGame:
         for player in self.players:
             player.add_tiles(self.tilebag.take_tiles(7))
 
-    def change_tiles(self, player, old_tiles_index, new_tiles):
-        player.change_tiles(old_tiles_index, new_tiles)
+    def remove_tiles(self, tiles_index):
+        for i in tiles_index:
+            self.current_player.tiles.pop(i)
+            
+        
+    def change_tiles(self, old_tiles_index, new_tiles):
+        old_tiles = []
+        for i in old_tiles_index:
+            old_tiles.append(self.current_player.tiles[i])
+            self.current_player.tiles[i] = new_tiles.pop(0)
+        self.current_player.add_tiles(old_tiles)
+        return old_tiles
 
     def view_scores(self):
         scores = ''
@@ -50,7 +60,7 @@ class ScrabbleGame:
 
     def put_word_in_table(self):
         self.board.put_word_in_table(self.current_player)
-        
+
     def end_game(self):
         if self.tilebag.tiles == []:
             for player in self.players:

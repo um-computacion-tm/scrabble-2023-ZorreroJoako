@@ -11,6 +11,11 @@ class TestScrabbleGame(unittest.TestCase):
         self.assertEqual(type(game.tilebag),BagTile)
         self.assertIsNone(game.current_player)
         self.assertFalse(game.game_over)
+
+    def test_view_players_lectern(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.view_players_lectern()
+        assert True
     
     def test_next_turn_when_game_is_starting(self):
         scrabble_game = ScrabbleGame(players_count=3)
@@ -86,6 +91,8 @@ O   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
 """
         self.maxDiff = None
         self.assertEqual(result, expected)
+
+
     
 if __name__ == '__main__':
     unittest.main()

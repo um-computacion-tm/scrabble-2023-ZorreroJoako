@@ -118,27 +118,40 @@ class Main():
             try:
                 option = int(input(self.menu('put_word', scrabble_game)))
                 if option == 1:
-                    word = input("Ingrese la palabra que desea colocar: ")
-                    location_x = int(input("Ingrese la coordenada x: "))
-                    location_y = int(input("Ingrese la coordenada y: "))
+                    word= input("Ingrese una palabra: ")
+                    location_x= input ("Ingrese la coordenada x: ")
+                    location_y= input ("Ingrese la coordenada y: ")
                     location = [location_x, location_y]
-                    orientation = input("Ingrese la orientación (V/H): ")
-                    scrabble_game.put_word_in_table(word, location, orientation)
+                    orientation = input ("Ingrese la orientación (V/H): ")
+                    if scrabble_game.validate_word_place_board(word, location, orientation):
+                        scrabble_game.put_word(word, location, orientation)
+                        scrabble_game.next_turn()
+                        return 'cambio de turno'
+                    else:
+                        print("Palabra no valida")
                 elif option == 2:
                     break
                 else:
                     raise ValueError
             except ValueError:
                 print ("Valor no valido")
-    
     def menu_change_tiles(self, scrabble_game):
         while True:
             try:
                 option = int(input(self.menu('change_tiles', scrabble_game)))
                 if option == 1:
-                    old_tiles_index = input("Ingrese los indices de las fichas que desea cambiar: ")
-                    new_tiles = input("Ingrese las nuevas fichas: ")
-                    scrabble_game.change_tiles(scrabble_game.current_player, old_tiles, new_tiles)
+                    tiles_index = input("Ingrese los indices de las fichas que desea cambiar: ")
+                    tiles_index = tiles_index.split(',')
+                    for i in range(len(tiles_index)):
+                        tiles_index = [int(i) for i in tiles_index]
+                        new_tiles = scrabble_game.tilebag.take_tiles(len(tiles_index))
+                        old_tiles = scrabble_game.change_tiles(tiles_index, new_tiles)
+                        scrabble_game.remove_tiles_from_player(tiles_index)
+                        scrabble_game.current_player.add_tiles(new_tiles)
+                        print(scrabble_game.current_player.view_lectern())
+                    # scrabble_game.next_turn()
+                    # return 'cambio de turno'
+
                 elif option == 2:
                     break
                 else:

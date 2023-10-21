@@ -89,6 +89,6 @@ class BagTile:
 
         except PutTilesException:
             return False
-
+            
     def tiles_leftover(self):
         return len(self.tiles)
