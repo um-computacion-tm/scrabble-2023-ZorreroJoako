@@ -1,6 +1,8 @@
 import unittest
+from unittest.mock import patch
 from game.scrabblegame import *
 from game.board import *
+from game.main import *
 
 class TestScrabbleGame(unittest.TestCase):
     def test_init(self):
@@ -92,7 +94,20 @@ O   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
         self.maxDiff = None
         self.assertEqual(result, expected)
 
+    @patch('game.tilebag.BagTile.take_tiles')
+    def test_change_tiles(self, mock_take_tiles):
+        scrabble = ScrabbleGame(2)
+        initial_value = len(scrabble.tilebag.tiles)
+        scrabble.current_player = scrabble.players[0]
+        tileA = Tile('A',1)
+        tileE = Tile('A',1)
+        tileF = Tile('F',1)
+        scrabble.players[0].tiles = [tileA,tileE,tileE,tileA,tileA,tileA,tileA]
+        mock_take_tiles.return_value = [tileF,tileF]
+        scrabble.change_tiles((1,2))
+        expected = [tileA,tileF,tileF,tileA,tileA,tileA,tileA]
+        self.assertEqual(scrabble.players[0].tiles, expected)
+        self.assertEqual(len(scrabble.tilebag.tiles), initial_value)
 
-    
 if __name__ == '__main__':
     unittest.main()

@@ -7,15 +7,7 @@ class Player:
 
     def add_tiles(self,tiles):
         self.tiles.extend(tiles)
-
-    
-    def change_tiles(self,old_tiles_index,new_tiles):
-        old_tiles=[]
-        for i in old_tiles_index:
-            old_tiles.append(self.tiles[i])
-            self.tiles[i]=new_tiles.pop(0)
-        return old_tiles
-
+        
     def split_word(self,word):
         word = word.upper()
         replacements = {'CH': '1', 'LL': '2', 'RR': '3'}

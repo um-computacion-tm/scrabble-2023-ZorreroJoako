@@ -1,4 +1,5 @@
 from game.scrabblegame import *
+from game.board import *
 
 class ValueError(Exception):
     pass
@@ -142,18 +143,15 @@ class Main():
                 if option == 1:
                     tiles_index = input("Ingrese los indices de las fichas que desea cambiar: ")
                     tiles_index = tiles_index.split(',')
-                    for i in range(len(tiles_index)):
-                        tiles_index = [int(i) for i in tiles_index]
-                        new_tiles = scrabble_game.tilebag.take_tiles(len(tiles_index))
-                        old_tiles = scrabble_game.change_tiles(tiles_index, new_tiles)
-                        scrabble_game.remove_tiles_from_player(tiles_index)
-                        scrabble_game.current_player.add_tiles(new_tiles)
-                        print(scrabble_game.current_player.view_lectern())
-                    # scrabble_game.next_turn()
-                    # return 'cambio de turno'
-
+                    tiles_index = [int(i) for i in tiles_index]
+                    old_tiles = scrabble_game.current_player.tiles
+                    new_tiles = scrabble_game.tilebag.take_tiles(len(tiles_index))
+                    scrabble_game.change_tiles(tiles_index)
+                    print(scrabble_game.current_player.view_lectern())
+                    scrabble_game.next_turn()
+                    return 'cambio de turno'
                 elif option == 2:
-                    break
+                        break
                 else:
                     raise ValueError
             except ValueError:

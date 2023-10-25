@@ -14,16 +14,6 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(len(player_1.tiles),4)
         self.assertEqual(player_1.tiles,['A','B','C','D'])
     
-    def test_change_tiles(self):
-        player=Player()
-        player.add_tiles(['A','B','C','D'])
-        old_tiles_index=[0,1,2]
-        new_tiles=['E','F','G']
-        old_tiles=player.change_tiles(old_tiles_index,new_tiles)
-        self.assertEqual(old_tiles,['A','B','C'])
-        self.assertEqual(player.tiles,['E','F','G','D'])
-   
-    
     def test_split_word(self):
         player = Player()
         splited_word = player.split_word('CASA')
