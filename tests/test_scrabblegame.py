@@ -1,6 +1,8 @@
 import unittest
+from unittest.mock import patch
 from game.scrabblegame import *
 from game.board import *
+from game.main import *
 
 class TestScrabbleGame(unittest.TestCase):
     def test_init(self):
@@ -11,6 +13,11 @@ class TestScrabbleGame(unittest.TestCase):
         self.assertEqual(type(game.tilebag),BagTile)
         self.assertIsNone(game.current_player)
         self.assertFalse(game.game_over)
+
+    def test_view_players_lectern(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.view_players_lectern()
+        assert True
     
     def test_next_turn_when_game_is_starting(self):
         scrabble_game = ScrabbleGame(players_count=3)
@@ -52,6 +59,55 @@ class TestScrabbleGame(unittest.TestCase):
         scrabble_game.players[1].tiles = []
         scrabble_game.players[2].tiles = []
         self.assertFalse(scrabble_game.end_game())
+
+    def test_view_scores(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.players[0].score = 10
+        scrabble_game.players[1].score = 20
+        scrabble_game.players[2].score = 30
+        self.assertEqual(scrabble_game.view_scores(),''': 10
+: 20
+: 30
+''')
+
+    def test_view_board(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        result = scrabble_game.view_board()
+        expected = """ 
+ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  
+A   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
+B     |2W|  |  |  |3L|  |  |  |3L|  |  |  |2W|  |
+C     |  |2W|  |  |  |2L|  |2L|  |  |  |2W|  |  |
+D   2L|  |  |2W|  |  |  |2L|  |  |  |2W|  |  |2L|
+E     |  |  |  |2W|  |  |  |  |  |2W|  |  |  |  |
+F     |3L|  |  |  |3L|  |  |  |3L|  |  |  |3L|  |
+G     |  |2L|  |  |  |2L|  |2L|  |  |  |2L|  |  |
+H   3W|  |  |2L|  |  |  |2W|  |  |  |2L|  |  |3W|
+I     |  |2L|  |  |  |2L|  |2L|  |  |  |2L|  |  |
+J     |3L|  |  |  |3L|  |  |  |3L|  |  |  |3L|  |
+K     |  |  |  |2W|  |  |  |  |  |2W|  |  |  |  |
+L   2L|  |  |2W|  |  |  |2L|  |  |  |2W|  |  |2L|
+M     |  |2W|  |  |  |2L|  |2L|  |  |  |2W|  |  |
+N     |2W|  |  |  |3L|  |  |  |3L|  |  |  |2W|  |
+O   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
+"""
+        self.maxDiff = None
+        self.assertEqual(result, expected)
+
+    @patch('game.tilebag.BagTile.take_tiles')
+    def test_change_tiles(self, mock_take_tiles):
+        scrabble = ScrabbleGame(2)
+        initial_value = len(scrabble.tilebag.tiles)
+        scrabble.current_player = scrabble.players[0]
+        tileA = Tile('A',1)
+        tileE = Tile('A',1)
+        tileF = Tile('F',1)
+        scrabble.players[0].tiles = [tileA,tileE,tileE,tileA,tileA,tileA,tileA]
+        mock_take_tiles.return_value = [tileF,tileF]
+        scrabble.change_tiles((1,2))
+        expected = [tileA,tileF,tileF,tileA,tileA,tileA,tileA]
+        self.assertEqual(scrabble.players[0].tiles, expected)
+        self.assertEqual(len(scrabble.tilebag.tiles), initial_value)
 
 if __name__ == '__main__':
     unittest.main()

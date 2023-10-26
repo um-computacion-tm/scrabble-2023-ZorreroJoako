@@ -30,7 +30,13 @@ class TestTileBag(unittest.TestCase):
     def test_put_too_much_tiles(self):
         tilebag=BagTile()
         tilebag.put_tiles([Tile('A',1)])
-        self.assertEqual(tilebag.tiles_leftover(),ALLTILES)        
+        self.assertEqual(tilebag.tiles_leftover(),ALLTILES)   
+
+
+    def test_repr_method(self):
+        instance = Tile('A', 1)
+        result = repr(instance)
+        self.assertEqual(result, "A")
 
 class TestWildcard(unittest.TestCase):
 
@@ -50,5 +56,6 @@ class TestWildcard(unittest.TestCase):
         with self.assertRaises(TileNotFoundException):
             wildcard.wildcard_choose("W")
 
+    
 if __name__ == '__main__':
     unittest.main()

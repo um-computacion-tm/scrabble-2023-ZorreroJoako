@@ -18,6 +18,9 @@ class Tile:
         self.letter = letter
         self.value = value
 
+    def __repr__(self):
+        return self.letter
+
 class Wildcard(Tile):
     def __init__(self, letter, value):
         super().__init__(letter="", value=0)
@@ -60,7 +63,7 @@ class BagTile:
             Tile('Ñ', 8),
             Tile('RR', 8),
             Tile('X', 8),
-            Tile('Z', 10),Wildcard("",0 ), Wildcard("", 0)]
+            Tile('Z', 10),Wildcard("?",0 ), Wildcard("?", 0)]
         random.shuffle(self.tiles)
 
     
@@ -89,6 +92,10 @@ class BagTile:
 
         except PutTilesException:
             return False
-
+            
     def tiles_leftover(self):
         return len(self.tiles)
+
+    def shuffle(self):
+        random.shuffle(self.tiles)
+        return self.tiles

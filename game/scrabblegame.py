@@ -14,15 +14,55 @@ class ScrabbleGame:
         self.current_player= None
         for i in range(self.players_count):
             self.players.append(Player())
+        self.add_tiles_to_players()
 
     def next_turn(self):
-        if self.current_player is None:
-            self.current_player = self.players[0]
-        elif self.current_player == self.players[-1]:
+        if self.current_player == None:
             self.current_player = self.players[0]
         else:
-            index=self.players.index(self.current_player)+1
-            self.current_player=self.players[index]
+            index = self.players.index(self.current_player)
+            if index == len(self.players) - 1:
+                self.current_player = self.players[0]
+            else:
+                self.current_player = self.players[index + 1]
+
+    def add_tiles_to_players(self):
+        for player in self.players:
+            player.add_tiles(self.tilebag.take_tiles(7))
+
+        
+    def change_tiles(self, old_tiles_index):
+        new_tiles = self.tilebag.take_tiles(len(old_tiles_index))
+        old_tiles = []
+        for i in old_tiles_index:
+            old_tiles.append(self.current_player.tiles[i])
+            self.current_player.tiles[i] = new_tiles.pop(0)
+        self.tilebag.put_tiles(old_tiles)
+        self.tilebag.shuffle()
+        return old_tiles
+
+    def view_scores(self):
+        scores = ''
+        for player in self.players:
+            scores += player.name + ': ' + str(player.score) + '\n'
+        return scores
+    
+    def view_players_lectern(self):
+        lectern = ''
+        for player in self.players:
+            lectern += player.view_lectern() + '\n'
+        return lectern
+
+    def view_board(self):
+        return self.board.show_board()
+
+    # def put_word_in_table(self):
+    #     if self.validate_words_with_rae(word):
+    #         if self.board_empty() and self.validate_len_of_word_in_board(word, location, orientation):
+    #             self.put_word_in_board(word, location, orientation)
+    #             self.remove_tiles(tiles_index)
+    #             self.add_tiles_to_players()
+    #             self.next_turn()
 
     def end_game(self):
         if self.tilebag.tiles == []:

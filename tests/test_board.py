@@ -107,8 +107,7 @@ class TestBoard(unittest.TestCase):
     def test_board_empty(self):
         board = Board()
         self.assertEqual(board.board_empty(),True) 
-    
-
+        print(board.show_board())
     def test_board_is_not_empty(self):
         board = Board()
         board.grid[7][7].add_letter(Tile('C', 1))
@@ -224,22 +223,21 @@ class TestBoard(unittest.TestCase):
         result = board.show_board()
         expected = """ 
  0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  
-A   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-B   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-C   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-D   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-E   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-F   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-G   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-H   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-I   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-J   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-K   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-L   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-M   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-N   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-O   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-
+A   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
+B     |2W|  |  |  |3L|  |  |  |3L|  |  |  |2W|  |
+C     |  |2W|  |  |  |2L|  |2L|  |  |  |2W|  |  |
+D   2L|  |  |2W|  |  |  |2L|  |  |  |2W|  |  |2L|
+E     |  |  |  |2W|  |  |  |  |  |2W|  |  |  |  |
+F     |3L|  |  |  |3L|  |  |  |3L|  |  |  |3L|  |
+G     |  |2L|  |  |  |2L|  |2L|  |  |  |2L|  |  |
+H   3W|  |  |2L|  |  |  |2W|  |  |  |2L|  |  |3W|
+I     |  |2L|  |  |  |2L|  |2L|  |  |  |2L|  |  |
+J     |3L|  |  |  |3L|  |  |  |3L|  |  |  |3L|  |
+K     |  |  |  |2W|  |  |  |  |  |2W|  |  |  |  |
+L   2L|  |  |2W|  |  |  |2L|  |  |  |2W|  |  |2L|
+M     |  |2W|  |  |  |2L|  |2L|  |  |  |2W|  |  |
+N     |2W|  |  |  |3L|  |  |  |3L|  |  |  |2W|  |
+O   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
 """
         self.maxDiff = None
         self.assertEqual(result, expected)
@@ -253,22 +251,21 @@ O   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
         result = board.show_board()
         expected = """ 
  0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  
-A   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-B   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-C   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-D   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-E   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-F   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-G   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-H   -  -  -  -  -  -  -  C  -  -  -  -  -  -  -  
-I   -  -  -  -  -  -  -  A  -  -  -  -  -  -  -  
-J   -  -  -  -  -  -  -  S  -  -  -  -  -  -  -  
-K   -  -  -  -  -  -  -  A  -  -  -  -  -  -  -  
-L   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-M   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-N   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-O   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
-
+A   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
+B     |2W|  |  |  |3L|  |  |  |3L|  |  |  |2W|  |
+C     |  |2W|  |  |  |2L|  |2L|  |  |  |2W|  |  |
+D   2L|  |  |2W|  |  |  |2L|  |  |  |2W|  |  |2L|
+E     |  |  |  |2W|  |  |  |  |  |2W|  |  |  |  |
+F     |3L|  |  |  |3L|  |  |  |3L|  |  |  |3L|  |
+G     |  |2L|  |  |  |2L|  |2L|  |  |  |2L|  |  |
+H   3W|  |  |2L|  |  |  |C |  |  |  |2L|  |  |3W|
+I     |  |2L|  |  |  |2L|A |2L|  |  |  |2L|  |  |
+J     |3L|  |  |  |3L|  |S |  |3L|  |  |  |3L|  |
+K     |  |  |  |2W|  |  |A |  |  |2W|  |  |  |  |
+L   2L|  |  |2W|  |  |  |2L|  |  |  |2W|  |  |2L|
+M     |  |2W|  |  |  |2L|  |2L|  |  |  |2W|  |  |
+N     |2W|  |  |  |3L|  |  |  |3L|  |  |  |2W|  |
+O   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
 """ 
         self.maxDiff = None
         self.assertEqual(result, expected)
@@ -313,5 +310,7 @@ O   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
         self.assertEqual(board.grid[7][10].letter, None)
         self.assertEqual(board.grid[7][11].letter, None)
         self.assertEqual(board.grid[7][12].letter, None)
+
+
 if __name__ == '__main__':
     unittest.main()
