@@ -12,7 +12,7 @@ class Main():
                 if players_count <=1   or players_count > 4:
                     raise ValueError
                 break
-            except ValueError:
+            except:
                 print ("Valor no valido")
         return players_count
 
@@ -77,7 +77,7 @@ class Main():
                     break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
     
     def menu_rack(self, scrabble_game):
@@ -90,7 +90,7 @@ class Main():
                     break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
 
     def menu_actions(self, scrabble_game):
@@ -109,7 +109,7 @@ class Main():
                     break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
         
     
@@ -134,14 +134,16 @@ class Main():
                     break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
+
     def menu_change_tiles(self, scrabble_game):
         while True:
             try:
                 option = int(input(self.menu('change_tiles', scrabble_game)))
                 if option == 1:
                     tiles_index = input("Ingrese los indices de las fichas que desea cambiar: ")
+                    print(f'Tiles: {tiles_index}')
                     tiles_index = tiles_index.split(',')
                     tiles_index = [int(i) for i in tiles_index]
                     old_tiles = scrabble_game.current_player.tiles
@@ -154,7 +156,7 @@ class Main():
                         break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
 
     def menu_next_turn(self, scrabble_game):
@@ -168,7 +170,7 @@ class Main():
                     break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
 
     def menu_scores(self, scrabble_game):
@@ -181,7 +183,7 @@ class Main():
                     break
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
     
             
@@ -199,7 +201,7 @@ class Main():
                     self.menu_scores(scrabble_game)
                 else:
                     raise ValueError
-            except ValueError:
+            except:
                 print ("Valor no valido")
 
     def play(self):
@@ -216,15 +218,3 @@ if __name__ == "__main__":
     main = Main()
     main.play()
     main.play_game(scrabble_game)
-
-
-        
-            # scrabble_game = ScrabbleGame(players_count=players_count)
-            # print ("Cantidad de jugadores: ", len(scrabble_game.players))
-            # scrabble_game.next_turn()
-            # print ("Turno de: ", scrabble_game.current_player)
-            # word= input("Ingrese una palabra: ")
-            # location_x= input ("Ingrese la coordenada x: ")
-            # location_y= input ("Ingrese la coordenada y: ")
-            # location = [location_x, location_y]
-            # orientation = input ("Ingrese la orientación (V/H): ")

@@ -262,7 +262,17 @@ Letras ->  | L | D | V | D | C | L | H |
             main.menu_actions(scrabble_game)
             mock_next_turn.assert_called_once()
 
-    @patch('builtins.input', side_effect=[7,2])
+    @patch('builtins.input', side_effect=[3,3,4])
+    @patch('game.main.Main.menu_next_turn', return_value='cambio de turno')
+    def test_menu_actions_3_next_turn(self,mock_input, mock_next_turn):
+        main = Main()
+        scrabble_game = ScrabbleGame(2)
+        scrabble_game.players[0].name = 'Jugador 1'
+        scrabble_game.players[1].name = 'Jugador 2'
+        scrabble_game.next_turn()
+        main.menu_actions(scrabble_game)
+
+    @patch('builtins.input', side_effect=[7,4])
     def test_menu_actions_exception(self, mock_input):
         main = Main()
         scrabble_game = ScrabbleGame(2)
@@ -271,17 +281,76 @@ Letras ->  | L | D | V | D | C | L | H |
         scrabble_game.next_turn()
         output_buffer = io.StringIO()
         sys.stdout = output_buffer
-        main.menu_rack(scrabble_game)
+        main.menu_actions(scrabble_game)
         sys.stdout = sys.__stdout__
         printed_output = output_buffer.getvalue()
         output_buffer.close()
         expected = '''Valor no valido\n'''
         self.maxDiff = None
         self.assertEqual(printed_output, expected)
-    
+
+    # @patch('builtins.input', side_effect=[1,"2,3"])
+    # @patch('game.tilebag.BagTile.take_tiles')
+    # def test_menu_actions_change_tiles(self, mock_input, mock_take):
+    #     main = Main()
+    #     scrabble_game = ScrabbleGame(2)
+    #     scrabble_game.players[0].name = 'Jugador 1'
+    #     scrabble_game.players[1].name = 'Jugador 2'
+    #     scrabble_game.next_turn()
+    #     tileA = Tile('A', 1)
+    #     tileB = Tile('B', 1)
+    #     mock_take.return_value = [tileA, tileA]
+    #     next_player = scrabble_game.players[0]
+    #     scrabble_game.players[0].tiles = [tileB, tileB, tileB, tileB, tileB, tileB, tileB]
+    #     main.menu_change_tiles(scrabble_game)
+    #     self.assertEqual(scrabble_game.players[0].tiles, [tileA, tileA, tileB, tileB, tileB, tileB, tileB])
+    #     self.assertEqual(next_player, scrabble_game.current_player) 
+
+    @patch('builtins.input', side_effect=[7,2])
+    def test_menu_actions_change_tiles_exception(self, mock_input):
+        main = Main()
+        scrabble_game = ScrabbleGame(2)
+        scrabble_game.players[0].name = 'Jugador 1'
+        scrabble_game.players[1].name = 'Jugador 2'
+        scrabble_game.next_turn()
+        output_buffer = io.StringIO()
+        sys.stdout = output_buffer
+        main.menu_change_tiles(scrabble_game)
+        sys.stdout = sys.__stdout__
+        printed_output = output_buffer.getvalue()
+        output_buffer.close()
+        expected = '''Valor no valido\n'''
+        self.maxDiff = None
+        self.assertEqual(printed_output, expected)
 
     @patch('builtins.input', side_effect=[1,2])
-    def test_menu_scores(self,mock_input):
+    def test_menu_actions_next_turn(self, mock_input):
+        main = Main ()
+        scrabble_game = ScrabbleGame (2)
+        scrabble_game.players [0] .name = 'Jugador 1'
+        scrabble_game.players [1] .name = 'Jugador 2'
+        scrabble_game.next_turn ()
+        self.assertEqual(main.menu_next_turn (scrabble_game), 'cambio de turno')
+    
+    @patch('builtins.input', side_effect=[7,2])
+    def test_menu_actions_next_turn_exception(self, mock_input):
+        main = Main()
+        scrabble_game = ScrabbleGame(2)
+        scrabble_game.players[0].name = 'Jugador 1'
+        scrabble_game.players[1].name = 'Jugador 2'
+        scrabble_game.next_turn()
+        output_buffer = io.StringIO()
+        sys.stdout = output_buffer
+        main.menu_next_turn(scrabble_game)
+        sys.stdout = sys.__stdout__
+        printed_output = output_buffer.getvalue()
+        output_buffer.close()
+        expected = '''Valor no valido\n'''
+        self.maxDiff = None
+        self.assertEqual(printed_output, expected)
+
+    @patch('builtins.input', side_effect=[1,2])
+    def test_menu_actions_scores(self,mock_input):
         main = Main()
         scrabble_game = ScrabbleGame(2)
         scrabble_game.players[0].name = 'Jugador 1'
@@ -299,7 +368,7 @@ Letras ->  | L | D | V | D | C | L | H |
         self.assertEqual(printed_output, expected)
 
     @patch('builtins.input', side_effect=[7,2])
-    def test_menu_scores_exception(self, mock_input):
+    def test_menu_actions_scores_exception(self, mock_input):
         main = Main()
         scrabble_game = ScrabbleGame(2)
         scrabble_game.players[0].name = 'Jugador 1'
@@ -314,5 +383,10 @@ Letras ->  | L | D | V | D | C | L | H |
         expected = '''Valor no valido\n'''
         self.maxDiff = None
         self.assertEqual(printed_output, expected)
+
+    
+
+
+
 if __name__ == '__main__':
     unittest.main()
