@@ -8,6 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [Development]
 
+### [0.1.1] - 2023-10-26
+
+### Added
+
+- Create change tiles in main
+- Create change tiles test in main
+
+### Changed
+
+- Modify tests in main
+
+### Issues
+
+- Problems with put word in main
+
 ### [0.1.0] - 2023-10-21
 
 ### Added
