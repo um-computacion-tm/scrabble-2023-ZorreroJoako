@@ -27,6 +27,7 @@ class Main():
     2) Ver Atril
     3) Ver Acciones
     4) Ver Puntuaciones
+    5) Salir
     Seleccion: '''
         elif menu == 'board':
             show_menu +=  '''    Tablero
@@ -64,6 +65,11 @@ class Main():
             show_menu += '''    Puntuaciones
     1) Ver puntuaciones
     2) Salir
+    Seleccion: '''
+        elif menu == 'exit':
+            show_menu += '''    Salir
+    1) Salir
+    2) Volver al menu
     Seleccion: '''
         return show_menu
 
@@ -186,9 +192,24 @@ class Main():
             except:
                 print ("Valor no valido")
     
+
+    def menu_salir(self, scrabble_game):
+        while True:
+            try:
+                option = int(input(self.menu('exit', scrabble_game)))
+                if option == 1:
+                    scrabble_game.game_over = True
+                    print ("Gracias por jugar\n")
+                    break
+                elif option == 2:
+                    break
+                else:
+                    raise ValueError
+            except:
+                print ("Valor no valido")
             
     def play_game(self, scrabble_game):
-        while True:
+        while scrabble_game.game_over == False:
             try:
                 option = int(input(self.menu('menu', scrabble_game)))
                 if option == 1:
@@ -199,6 +220,8 @@ class Main():
                     self.menu_actions(scrabble_game)
                 elif option == 4:
                     self.menu_scores(scrabble_game)
+                elif option == 5:
+                    self.menu_salir(scrabble_game)
                 else:
                     raise ValueError
             except:
@@ -213,8 +236,6 @@ class Main():
         scrabble_game.current_player = scrabble_game.players[0]
         self.play_game(scrabble_game)
     
-        
 if __name__ == "__main__":
     main = Main()
     main.play()
-    main.play_game(scrabble_game)

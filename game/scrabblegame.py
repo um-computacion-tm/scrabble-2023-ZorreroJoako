@@ -63,7 +63,7 @@ class ScrabbleGame:
     #             self.remove_tiles(tiles_index)
     #             self.add_tiles_to_players()
     #             self.next_turn()
-
+    
     def end_game(self):
         if self.tilebag.tiles == []:
             for player in self.players:
