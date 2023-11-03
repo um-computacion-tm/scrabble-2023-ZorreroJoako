@@ -464,6 +464,21 @@ Letras ->  | L | D | V | D | C | L | H |
         printed_output = output_buffer.getvalue()
         output_buffer.close()
 
+    # @patch ("builtins.input", side_effect= [1, "laso", 7,7, "H"])
+    # def test_put_word(self, mock_input):
+    #     main = Main()
+    #     scrabble_game = ScrabbleGame(2)
+    #     scrabble_game.players[0].name = "Jugador 1"
+    #     scrabble_game.players[1].name = "Jugador 2"
+    #     scrabble_game.next_turn()
+    #     scrabble_game.current_player.tiles = [Tile("L", 1),Tile("A", 1),Tile("S", 1),Tile("T", 1),Tile("O", 1),Tile("B", 1),Tile("L", 1)]
+    #     result = main.menu_put_word(scrabble_game)
+    #     print(scrabble_game.board.show_board())
+    #     self.assertEqual(scrabble_game.board.grid[7][7].letter,'L')
+    #     self.assertEqual(scrabble_game.board.grid[7][8].letter,'A')
+    #     self.assertEqual(scrabble_game.board.grid[7][9].letter,'S')
+    #     self.assertEqual(scrabble_game.board.grid[7][10].letter,'O')
+    #     self.assertEqual(result, 'cambio de turno')
 
     
 

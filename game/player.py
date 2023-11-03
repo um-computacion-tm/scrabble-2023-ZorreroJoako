@@ -44,6 +44,33 @@ class Player:
             lectern += ' ' + tile.letter + ' |'
         return lectern
 
-    
-    
-    
+    def has_tiles(self,word):
+        copy_lectern = self.tiles.copy()
+        is_valid = 0
+        word = word.upper()
+        for letter in word:
+            for tile in copy_lectern:
+                if tile.letter == letter:
+                    is_valid += 1
+                    copy_lectern.remove(tile)
+                    break
+        if is_valid == len(word):
+            return True
+        else :
+            return False
+
+    def player_take_tiles(self,word):
+        word = self.split_word(word)
+        tiles=[]
+        for letter in word:
+            for tile in self.tiles:
+                if tile.letter==letter.upper():
+                    tiles.append(tile)
+                    self.tiles.remove(tile)
+                    break
+        return tiles
+
+
+        
+
+                    

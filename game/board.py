@@ -91,11 +91,11 @@ class Board:
             if self.board_empty() and self.validate_len_of_word_in_board(word, location, orientation):
                 for i in range (len(word)):
                     if orientation == "H":
-                        pos_x = location[0] + i
-                        return pos_x==7
+                        position_x = location[0] + i
+                        return position_x==7
                     else:
-                        pos_y = location[1] + i
-                        return pos_y==7
+                        position_y = location[1] + i
+                        return position_y==7
             else:
                 return self.validate_not_empty(word, location, orientation)
 
@@ -138,17 +138,14 @@ class Board:
         return view
 
     
-    def put_word(self,word, location, orientation):
-        word = word.upper()
-        if self.validate_word_place_board(word, location, orientation):
-            if orientation == 'H':
-                for i in range(len(word)):
-                    self.grid[location[0]][location[1]+i].letter = word[i]
-            else:
-                for i in range(len(word)):
-                    self.grid[location[0]+i][location[1]].letter = word[i]
-            return True
-        else:
-            return False
-        
+    def put_word(self,word,position,orientation):
+        orientation = orientation.upper()
+        horizontal = True if orientation == 'H' else False
+        j=0
+        for i in range(len(word)):
+            cell = self.grid[position[0]][position[1]+i+j] if horizontal else self.grid[position[0]+i+j][position[1]]
+            while cell.letter:
+                j+=1
+                cell = self.grid[position[0]][position[1]+i+j] if horizontal else self.grid[position[0]+i+j][position[1]]
+            cell.letter = word[i]
     
