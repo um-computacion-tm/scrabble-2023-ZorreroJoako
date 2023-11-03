@@ -270,46 +270,47 @@ O   3W|  |  |2L|  |  |  |3W|  |  |  |2L|  |  |3W|
         self.maxDiff = None
         self.assertEqual(result, expected)
     
-    # @patch('game.board.dle.search_by_word')
-    # def test_put_word_valid_horizontal(self, mock_search_by_word):
-    #     mock_search_by_word.return_value.title ='casa | Definición | Diccionario de la lengua española | RAE - ASALE'
-    #     board = Board()
-    #     word = "Casa"
-    #     location = (7, 7)
-    #     orientation = "H"
-    #     board.put_word(word, location, orientation)
-    #     self.assertEqual(board.grid[7][7].letter, "C")
-    #     self.assertEqual(board.grid[7][8].letter, "A")
-    #     self.assertEqual(board.grid[7][9].letter, "S")
-    #     self.assertEqual(board.grid[7][10].letter, "A")
+    @patch('game.board.dle.search_by_word')
+    def test_put_word_valid_horizontal(self, mock_search_by_word):
+        mock_search_by_word.return_value.title ='casa | Definición | Diccionario de la lengua española | RAE - ASALE'
+        board = Board()
+        word = [Tile('C',1),Tile('A',1),Tile('S',1),Tile('A',1)]
+        location = (7, 7)
+        orientation = "H"
+        board.put_word(word, location, orientation)
+        self.assertEqual(board.grid[7][7].letter.letter, "C")
+        self.assertEqual(board.grid[7][8].letter.letter, "A")
+        self.assertEqual(board.grid[7][9].letter.letter, "S")
+        self.assertEqual(board.grid[7][10].letter.letter, "A")
+    
+    @patch('game.board.dle.search_by_word')
+    def test_put_word_valid_vertical(self, mock_search_by_word):
+        mock_search_by_word.return_value.title ='casa | Definición | Diccionario de la lengua española | RAE - ASALE'
+        board = Board()
+        word = [Tile('C',1),Tile('A',1),Tile('S',1),Tile('A',1)]
+        location = (7, 7)
+        orientation = "V"
+        board.put_word(word, location, orientation)
+        self.assertEqual(board.grid[7][7].letter.letter, "C")
+        self.assertEqual(board.grid[8][7].letter.letter, "A")
+        self.assertEqual(board.grid[9][7].letter.letter, "S")
+        self.assertEqual(board.grid[10][7].letter.letter, "A")
 
-    # @patch('game.board.dle.search_by_word')
-    # def test_put_word_valid_vertical(self, mock_search_by_word):
-    #     mock_search_by_word.return_value.title ='casa | Definición | Diccionario de la lengua española | RAE - ASALE'
-    #     board = Board()
-    #     word = "Casa"
-    #     location = (7, 7)
-    #     orientation = "V"
-    #     board.put_word(word, location, orientation)
-    #     self.assertEqual(board.grid[7][7].letter, "C")
-    #     self.assertEqual(board.grid[8][7].letter, "A")
-    #     self.assertEqual(board.grid[9][7].letter, "S")
-    #     self.assertEqual(board.grid[10][7].letter, "A")
-        
-    # @patch('game.board.dle.search_by_word')
-    # def test_put_word_invalid(self, mock_search_by_word):
-    #     mock_search_by_word.return_value.title = 'Diccionario de la lengua española | Edición del Tricentenario | RAE - ASALE'
-    #     board = Board()
-    #     word = "asdfghj"
-    #     location = (7, 7)
-    #     orientation = "H"
-    #     board.put_word(word, location, orientation)
-    #     self.assertEqual(board.grid[7][7].letter, None)
-    #     self.assertEqual(board.grid[7][8].letter, None)
-    #     self.assertEqual(board.grid[7][9].letter, None)
-    #     self.assertEqual(board.grid[7][10].letter, None)
-    #     self.assertEqual(board.grid[7][11].letter, None)
-    #     self.assertEqual(board.grid[7][12].letter, None)
+    @patch('game.board.dle.search_by_word')
+    def test_put_word_valid_with_previous_word(self, mock_search_by_word):
+        mock_search_by_word.return_value.title ='casa | Definición | Diccionario de la lengua española | RAE - ASALE'
+        board = Board()
+        board.grid[7][7].letter = Tile('C',3)
+        word = [Tile('A',1),Tile('S',1),Tile('A',1)]
+        location = (7, 7)
+        orientation = "V"
+        board.put_word(word, location, orientation)
+        self.assertEqual(board.grid[7][7].letter.letter, "C")
+        self.assertEqual(board.grid[8][7].letter.letter, "A")
+        self.assertEqual(board.grid[9][7].letter.letter, "S")
+        self.assertEqual(board.grid[10][7].letter.letter, "A")
+
+
 
 
 if __name__ == '__main__':

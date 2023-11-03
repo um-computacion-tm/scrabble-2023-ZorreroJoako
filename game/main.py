@@ -127,24 +127,23 @@ class Main():
                 option = int(input(self.menu('put_word', scrabble_game)))
                 if option == 1:
                     word= input("Ingrese una palabra: ")
-                    location_x= input ("Ingrese la coordenada x: ")
-                    location_y= input ("Ingrese la coordenada y: ")
+                    location_x= int(input ("Ingrese la coordenada x: "))
+                    location_y= int(input ("Ingrese la coordenada y: "))
                     location = [location_x, location_y]
-                    orientation = input ("Ingrese la orientación (V/H): ")
-                    # ipdb.set_trace()
+                    orientation = input ("Ingrese la orientación (V/H): ").upper()
                     if scrabble_game.board.board_empty():
                         if scrabble_game.board.validate_word_place_board(word, location, orientation) and scrabble_game.current_player.has_tiles(word):
-                            scrabble_game.board.put_word(word, location, orientation)
+                            tiles = scrabble_game.current_player.player_take_tiles(word)
+                            scrabble_game.board.put_word(tiles, location, orientation)
+                            scrabble_game.current_player.add_tiles(scrabble_game.tilebag.take_tiles(len(word)))
                             scrabble_game.next_turn()
                             return 'cambio de turno'
-                        elif not scrabble_game.board.validate_words_with_rae(word):
-                            print("No esta en el diccionario")
-                        elif not scrabble_game.board.validate_len_of_word_in_board(word, location, orientation):
-                            print("No entra en el tablero")
-                        elif not scrabble_game.board.validate_word_place_board(word, location, orientation):
-                            print("No es una posicion válida")
-                    else:
-                        print("Palabra no valida")
+                        # elif scrabble_game.board.validate_word_place_board(word, location, orientation):
+                        #     print ("No tienes las fichas")
+                        # elif scrabble_game.current_player.has_tiles(word):
+                        #     print ("La palabra es invalida")
+                        else:
+                            print ("La palabra y las fichas son invalidas")
                 elif option == 2:
                     break
                 else:

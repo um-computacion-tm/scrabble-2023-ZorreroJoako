@@ -57,13 +57,25 @@ Letras ->  | A | A | A | A | A | A | A |''')
         result = player.has_tiles('casa')
         self.assertEqual(result, True)
 
-    def test_has_tiles(self):
+    def test_has_tiles_invalid(self):
         player = Player()
         player.tiles = [Tile('A',1),Tile('C',1),Tile('T',1),Tile('S',1),Tile('B',1),Tile('R',1),Tile('T',1)]
         result = player.has_tiles('casa')
         self.assertEqual(result, False)
     
-    # def test_player_take_tiles(self):
+    def test_player_take_tiles(self):
+        player = Player()
+        tileA = Tile ('A',1)
+        tileC = Tile ('C',1)
+        tileG = Tile ('G',2)
+        tileS = Tile ('S',1)
+        tileT = Tile ('T',1)
+        player.tiles = [tileA,tileC,tileG,tileS,tileT,tileA,tileT]
+        tiles = player.player_take_tiles('casa')
+        self.assertEqual(player.tiles, [tileG,tileT,tileT])
+        self.assertEqual(tiles, [tileC,tileA,tileS,tileA])
+
+    # def test_fill_tiles(self):
     #     player = Player()
     #     tileA = Tile ('A',1)
     #     tileC = Tile ('C',1)
@@ -71,9 +83,8 @@ Letras ->  | A | A | A | A | A | A | A |''')
     #     tileS = Tile ('S',1)
     #     tileT = Tile ('T',1)
     #     player.tiles = [tileA,tileC,tileG,tileS,tileT,tileA,tileT]
-    #     player.player_take_tiles('casa')
-    #     self.assertEqual(player.tiles, [tileG,tileT,tileT])
-        
-
+    #     tiles = player.player_take_tiles('casa')
+    #     player.fill_tiles()
+    #     self.assertEqual(len(player.tiles), 7)
 if __name__ == '__main__':
     unittest.main()

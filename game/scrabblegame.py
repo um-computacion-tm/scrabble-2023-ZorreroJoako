@@ -67,3 +67,5 @@ class ScrabbleGame:
         else:
             self.game_over = False
         return self.game_over
+
+    
