@@ -70,9 +70,7 @@ class Player:
                     break
         return tiles
 
-    def fill_tiles(self, tiles):
-        self.tiles.extend(tiles)
-        return self.tiles
+    
         
 
                     
