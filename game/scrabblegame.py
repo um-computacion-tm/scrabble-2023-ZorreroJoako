@@ -55,15 +55,7 @@ class ScrabbleGame:
 
     def view_board(self):
         return self.board.show_board()
-
-    # def put_word_in_table(self):
-    #     if self.validate_words_with_rae(word):
-    #         if self.board_empty() and self.validate_len_of_word_in_board(word, location, orientation):
-    #             self.put_word_in_board(word, location, orientation)
-    #             self.remove_tiles(tiles_index)
-    #             self.add_tiles_to_players()
-    #             self.next_turn()
-
+    
     def end_game(self):
         if self.tilebag.tiles == []:
             for player in self.players:
@@ -75,3 +67,5 @@ class ScrabbleGame:
         else:
             self.game_over = False
         return self.game_over
+
+    

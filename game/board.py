@@ -11,21 +11,24 @@ class Board:
 
         for row in range(len(self.grid)):
             for col in range(len(self.grid[row])):
-                if (row, col) in LETTER_MULTIPLIERS:
-                    if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)):
-                        multiplier = 3
-                    else:
-                        multiplier = 2
-                    self.grid[row][col] = Cell(multiplier, 'letter', True)
-                elif (row, col) in WORD_MULTIPLIERS:
-                    if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
-                        multiplier = 3
-                    else:
-                        multiplier = 2
-                    self.grid[row][col] = Cell(multiplier, 'word', True)
-                else:
-                    self.grid[row][col] = Cell(1, '', False)
+                self.assing_multipliers2(row, col, WORD_MULTIPLIERS, LETTER_MULTIPLIERS)
 
+    def assing_multipliers2(self, row, col, WORD_MULTIPLIERS, LETTER_MULTIPLIERS):
+        if (row, col) in LETTER_MULTIPLIERS:
+                if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)):
+                    multiplier = 3
+                else:
+                    multiplier = 2
+                self.grid[row][col] = Cell(multiplier, 'letter', True)
+        elif (row, col) in WORD_MULTIPLIERS:
+            if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
+                multiplier = 3
+            else:
+                multiplier = 2
+            self.grid[row][col] = Cell(multiplier, 'word', True)
+        else:
+            self.grid[row][col] = Cell(1, '', False)
+            
     def validate_words_with_rae(self, word):
         valid=dle.search_by_word(word)
         if word.lower() in valid.title:
@@ -65,46 +68,39 @@ class Board:
         elif self.grid[7][7].letter != None:
             return False
 
+    def validate_not_empty(self, word, location, orientation):
+        h_space = len(word) <= len(self.grid)-location[0]
+        v_space = len(word) <= len(self.grid)-location[1]
+        intersections = 0
+        is_valid = 0
+        if (orientation=='H' and h_space):
+            for i in range(len(word)):
+                cell = self.grid[location[0]][location[1]+i].letter
+                if cell:
+                    intersections += 1
+                    if cell.letter == word[i]:
+                        is_valid += 1
+        elif ((not orientation=='H') and v_space):
+            for i in range(len(word)):
+                cell = self.grid[location[0]+i][location[1]].letter
+                if cell:
+                    intersections += 1
+                    if cell.letter == word[i]:
+                        is_valid += 1
+        return is_valid != 0 and intersections == is_valid
 
     def validate_word_place_board(self, word, location, orientation):
         if self.validate_words_with_rae(word):
             if self.board_empty() and self.validate_len_of_word_in_board(word, location, orientation):
                 for i in range (len(word)):
                     if orientation == "H":
-                        pos_x = location[0] + i
-                        if pos_x==7:
-                            return True
-                        else:
-                            return False
+                        position_x = location[0] + i
+                        return position_x==7
                     else:
-                        pos_y = location[1] + i
-                        if pos_y==7:
-                            return True
-                        else:
-                            return False
+                        position_y = location[1] + i
+                        return position_y==7
             else:
-                h_space = len(word) <= len(self.grid)-location[0]
-                v_space = len(word) <= len(self.grid)-location[1]
-                intersections = 0
-                is_valid = 0
-                if (orientation=='H' and h_space):
-                    for i in range(len(word)):
-                        cell = self.grid[location[0]][location[1]+i].letter
-                        if cell is not None:
-                            intersections += 1
-                            if cell.letter == word[i]:
-                                is_valid += 1
-                elif ((not orientation=='H') and v_space):
-                    for i in range(len(word)):
-                        cell = self.grid[location[0]+i][location[1]].letter
-                        if cell is not None:
-                            intersections += 1
-                            if cell.letter == word[i]:
-                                is_valid += 1
-                if is_valid != 0 and intersections == is_valid:
-                    return True
-                else:
-                    return False
+                return self.validate_not_empty(word, location, orientation)
 
     def words_with_accent(self, word):
         word = word.lower()
@@ -122,18 +118,13 @@ class Board:
         return word.upper()
 
     def show_board(self):
-        view = " \n"
-        view += " "
-        x = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+        view = " \n 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  \n"
         y = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
-        for idx, label in enumerate(x):
-            view += f"{label}  "
-        view += "\n"
 
         for i, row in enumerate(self.grid):
             view += f"{y[i]}   "
             for cell in row:
-                if cell.letter is None:
+                if not cell.letter:
                     if cell.multiplier_type == 'letter' and cell.multiplier == 3:
                         view += f"3L|"
                     elif cell.multiplier_type == 'letter' and cell.multiplier == 2:
@@ -150,17 +141,14 @@ class Board:
         return view
 
     
-    def put_word(self,word, location, orientation):
-        word = word.upper()
-        if self.validate_word_place_board(word, location, orientation):
-            if orientation == 'H':
-                for i in range(len(word)):
-                    self.grid[location[0]][location[1]+i].letter = word[i]
-            else:
-                for i in range(len(word)):
-                    self.grid[location[0]+i][location[1]].letter = word[i]
-            return True
-        else:
-            return False
-        
+    def put_word(self,word,position,orientation):
+        orientation = orientation.upper()
+        horizontal = True if orientation == 'H' else False
+        j=0
+        for i in range(len(word)):
+            cell = self.grid[position[0]][position[1]+i+j] if horizontal else self.grid[position[0]+i+j][position[1]]
+            while cell.letter:
+                j+=1
+                cell = self.grid[position[0]][position[1]+i+j] if horizontal else self.grid[position[0]+i+j][position[1]]
+            cell.letter = word[i]
     
