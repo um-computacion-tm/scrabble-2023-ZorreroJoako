@@ -91,6 +91,7 @@ class Board:
 
     def validate_word_place_board(self, word, location, orientation):
         if self.validate_words_with_rae(word):
+            word = word.upper()
             if self.board_empty() and self.validate_len_of_word_in_board(word, location, orientation):
                 for i in range (len(word)):
                     if orientation == "H":
@@ -152,3 +153,10 @@ class Board:
                 cell = self.grid[position[0]][position[1]+i+j] if horizontal else self.grid[position[0]+i+j][position[1]]
             cell.letter = word[i]
     
+    def get_word_without_intersections(self,word,pos,horizontal):
+        result = ''
+        for i in range(len(word)):
+            cell = self.grid[pos[0] + (i if not horizontal else 0)][pos[1] + (i if horizontal else 0)].letter
+            if not cell:
+                result += word[i]
+        return result

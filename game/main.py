@@ -130,24 +130,29 @@ class Main():
                     location_y= int(input ("Ingrese la coordenada y: "))
                     location = [location_x, location_y]
                     orientation = input ("Ingrese la orientación (V/H): ").upper()
-                    if scrabble_game.board.board_empty():
-                        if scrabble_game.board.validate_word_place_board(word, location, orientation) and scrabble_game.current_player.has_tiles(word):
+                    if scrabble_game.board.validate_word_place_board(word, location, orientation):
+                        word = scrabble_game.board.words_with_accent(word)
+                        word = word.upper()
+                        if not scrabble_game.board.board_empty():
+                            word = scrabble_game.board.get_word_without_intersections(word, location, orientation=='H')
+                        print(f'HasTile {scrabble_game.current_player.has_tiles(word)}')
+                        if scrabble_game.current_player.has_tiles(word):
                             tiles = scrabble_game.current_player.player_take_tiles(word)
                             scrabble_game.board.put_word(tiles, location, orientation)
                             scrabble_game.current_player.add_tiles(scrabble_game.tilebag.take_tiles(len(word)))
                             scrabble_game.next_turn()
                             return 'cambio de turno'
-                        # elif scrabble_game.board.validate_word_place_board(word, location, orientation):
-                        #     print ("No tienes las fichas")
-                        # elif scrabble_game.current_player.has_tiles(word):
-                        #     print ("La palabra es invalida")
-                        else:
-                            print ("La palabra y las fichas son invalidas")
+                    elif scrabble_game.board.validate_word_place_board(word, location, orientation):
+                        print ("No tienes las fichas")
+                    elif scrabble_game.current_player.has_tiles(word):
+                        print ("La palabra es invalida")
+                    else:
+                        print ("La palabra y las fichas son invalidas")
                 elif option == 2:
                     break
                 else:
                     raise ValueError
-            except:
+            except ValueError:
                 print ("Valor no valido")
 
     def menu_change_tiles(self, scrabble_game):
