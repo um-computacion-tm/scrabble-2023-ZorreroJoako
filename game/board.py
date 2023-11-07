@@ -11,21 +11,24 @@ class Board:
 
         for row in range(len(self.grid)):
             for col in range(len(self.grid[row])):
-                if (row, col) in LETTER_MULTIPLIERS:
-                    if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)):
-                        multiplier = 3
-                    else:
-                        multiplier = 2
-                    self.grid[row][col] = Cell(multiplier, 'letter', True)
-                elif (row, col) in WORD_MULTIPLIERS:
-                    if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
-                        multiplier = 3
-                    else:
-                        multiplier = 2
-                    self.grid[row][col] = Cell(multiplier, 'word', True)
-                else:
-                    self.grid[row][col] = Cell(1, '', False)
+                self.assing_multipliers2(row, col, WORD_MULTIPLIERS, LETTER_MULTIPLIERS)
 
+    def assing_multipliers2(self, row, col, WORD_MULTIPLIERS, LETTER_MULTIPLIERS):
+        if (row, col) in LETTER_MULTIPLIERS:
+                if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)):
+                    multiplier = 3
+                else:
+                    multiplier = 2
+                self.grid[row][col] = Cell(multiplier, 'letter', True)
+        elif (row, col) in WORD_MULTIPLIERS:
+            if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
+                multiplier = 3
+            else:
+                multiplier = 2
+            self.grid[row][col] = Cell(multiplier, 'word', True)
+        else:
+            self.grid[row][col] = Cell(1, '', False)
+            
     def validate_words_with_rae(self, word):
         valid=dle.search_by_word(word)
         if word.lower() in valid.title:

@@ -1,23 +1,4 @@
-# Main 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/main)
-
-# Develop
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/develop)
-
-# Maintainability 
-[![Maintainability](https://api.codeclimate.com/v1/badges/41aa92aea8dc9d4ec121/maintainability)](https://codeclimate.com/github/um-computacion-tm/scrabble-2023-ZorreroJoako/maintainability)
-
-# Coverage
-[![Test Coverage](https://api.codeclimate.com/v1/badges/41aa92aea8dc9d4ec121/test_coverage)](https://codeclimate.com/github/um-computacion-tm/scrabble-2023-ZorreroJoako/test_coverage)
-
-# Data
-
-Alumno:Zorrero Joaquín
-
-Carrera: Ingeniería en Computacion
-
-Universidad de Mendoza
-
+# About Scrabble
 Scrabble is a word game that is typically played by 2 to 4 players. The game consists of a game board with a grid of squares and a set of letter tiles. Each player takes turns forming words on the board by placing their letter tiles horizontally or vertically, making sure that the words created are valid in the dictionary.
 
 Here's how Scrabble works and how the game is played:
@@ -41,3 +22,31 @@ Here's how Scrabble works and how the game is played:
     Strategy: Scrabble involves strategic thinking, as players aim to maximize their points by creating high-scoring words, using premium squares effectively, and blocking opponents.
 
 Scrabble is a game that combines vocabulary, strategy, and a bit of luck due to the random drawing of letter tiles. It's a popular and challenging word game that can be enjoyed by players of all ages.
+
+# How To Run Scrabble In Docker
+1. Make sure to have docker installed. You can install Docker from Docker oficial web site (https://www.docker.com/get-started) if you dont have it.
+2. Install Git using in cmd: -apt-get install git-
+3. Clone the repository using: -git clone git@github.com:um-computacion-tm/scrabble-2023-ZorreroJoako.git
+4. Navigate to the repository directory: cd /.../scrabble-2023-ZorreroJoako.git
+5. Build the Docker image: -docker build -t image_name .-  (In image name give it the name you want)
+6. Run the Docker image: -docker run -it image_name-
+
+# Main 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/main)
+
+# Develop
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/develop)
+
+# Maintainability 
+[![Maintainability](https://api.codeclimate.com/v1/badges/41aa92aea8dc9d4ec121/maintainability)](https://codeclimate.com/github/um-computacion-tm/scrabble-2023-ZorreroJoako/maintainability)
+
+# Coverage
+[![Test Coverage](https://api.codeclimate.com/v1/badges/41aa92aea8dc9d4ec121/test_coverage)](https://codeclimate.com/github/um-computacion-tm/scrabble-2023-ZorreroJoako/test_coverage)
+
+# Data
+
+Alumno:Zorrero Joaquín
+
+Carrera: Ingeniería en Computacion
+
+Universidad de Mendoza
