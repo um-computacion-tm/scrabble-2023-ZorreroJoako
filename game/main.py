@@ -1,6 +1,5 @@
 from game.scrabblegame import *
 from game.board import *
-import ipdb
 
 class ValueError(Exception):
     pass
