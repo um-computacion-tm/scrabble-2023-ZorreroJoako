@@ -296,14 +296,14 @@ class TestCalculateWordValue(unittest.TestCase):
         word = 'casa'
         pos=(7,6)
         value = board.calculate_word_value(word, pos, horizontal=True)
-        self.assertEqual(value, 7)
+        self.assertEqual(value, 12)
 
     def test_with_word_multiplier_3(self):
         board = Board()        
         word = 'casa'
         pos=(14,6)
         value = board.calculate_word_value(word, pos, horizontal=True)
-        self.assertEqual(value, 8)
+        self.assertEqual(value, 18)
 
     def test_with_letter_multiplier_2(self):
         board = Board()        
@@ -324,7 +324,7 @@ class TestCalculateWordValue(unittest.TestCase):
         word = 'casa'
         pos=(14,0)
         value = board.calculate_word_value(word, pos, horizontal=True)
-        self.assertEqual(value, 13)
+        self.assertEqual(value, 21)
 
     def test_with_letter_multiplier_and_word_multiplier_no_active(self):
         board = Board()        
@@ -439,7 +439,7 @@ class TestCalculateWordValue(unittest.TestCase):
         pos = (7,7)
         horizontal = True
         value = board.calculate_word_value(word,pos,horizontal)
-        self.assertEqual(value, 8)
+        self.assertEqual(value, 10)
 
     def test_calculate_word_value_with_intersection(self):
         board = Board()
