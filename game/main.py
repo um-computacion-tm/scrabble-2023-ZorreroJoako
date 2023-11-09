@@ -16,9 +16,6 @@ class Main():
                 print ("Valor no valido")
         return players_count
 
-    
-      
-
     def menu(self, menu, scrabble_game):
         show_menu = f'Turno del jugador {scrabble_game.current_player.name}\n\n'
         if menu == 'menu':
@@ -118,37 +115,44 @@ class Main():
             except:
                 print ("Valor no valido")
         
-    
-
     def menu_put_word(self, scrabble_game):
         while True:
             try:
                 option = int(input(self.menu('put_word', scrabble_game)))
                 if option == 1:
-                    word= input("Ingrese una palabra: ")
-                    location_x= int(input ("Ingrese la coordenada x: "))
-                    location_y= int(input ("Ingrese la coordenada y: "))
-                    location = [location_x, location_y]
-                    orientation = input ("Ingrese la orientación (V/H): ").upper()
-                    if scrabble_game.board.board_empty():
-                        if scrabble_game.board.validate_word_place_board(word, location, orientation) and scrabble_game.current_player.has_tiles(word):
-                            tiles = scrabble_game.current_player.player_take_tiles(word)
-                            scrabble_game.board.put_word(tiles, location, orientation)
-                            scrabble_game.current_player.add_tiles(scrabble_game.tilebag.take_tiles(len(word)))
-                            scrabble_game.next_turn()
-                            return 'cambio de turno'
-                        # elif scrabble_game.board.validate_word_place_board(word, location, orientation):
-                        #     print ("No tienes las fichas")
-                        # elif scrabble_game.current_player.has_tiles(word):
-                        #     print ("La palabra es invalida")
-                        else:
-                            print ("La palabra y las fichas son invalidas")
+                    return self.put_word_wrapper(scrabble_game)
                 elif option == 2:
                     break
                 else:
                     raise ValueError
-            except:
+            except ValueError:
                 print ("Valor no valido")
+
+    def put_word_wrapper(self, scrabble_game):
+        word= input("Ingrese una palabra: ")
+        location_x= int(input ("Ingrese la coordenada x: "))
+        location_y= int(input ("Ingrese la coordenada y: "))
+        location = [location_x, location_y]
+        orientation = input ("Ingrese la orientación (V/H): ").upper()
+        if scrabble_game.board.validate_word_place_board(word, location, orientation):
+            word = scrabble_game.board.words_with_accent(word)
+            horizontal = True if orientation == 'H' else False
+            points = self.scrabble_game.board.calculate_word_value(word,location,horizontal)
+            if not scrabble_game.board.board_empty():
+                word = scrabble_game.board.get_word_without_intersections(word, location, orientation=='H')
+            if scrabble_game.current_player.has_tiles(word):
+                tiles = scrabble_game.current_player.player_take_tiles(word)
+                scrabble_game.current_player.points += points
+                scrabble_game.board.put_word(tiles, location, orientation)
+                scrabble_game.current_player.add_tiles(scrabble_game.tilebag.take_tiles(len(word)))
+                scrabble_game.next_turn()
+                return 'cambio de turno'
+        elif scrabble_game.board.validate_word_place_board(word, location, orientation):
+            print ("No tienes las fichas")
+        elif scrabble_game.current_player.has_tiles(word):
+            print ("La palabra es invalida")
+        else:
+            print ("La palabra o las fichas son invalidas")
 
     def menu_change_tiles(self, scrabble_game):
         while True:

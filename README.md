@@ -26,10 +26,10 @@ Scrabble is a game that combines vocabulary, strategy, and a bit of luck due to 
 # How To Run Scrabble In Docker
 1. Make sure to have docker installed. You can install Docker from Docker oficial web site (https://www.docker.com/get-started) if you dont have it.
 2. Install Git using in cmd: -apt-get install git-
-3. Clone the repository using: -git clone git@github.com:um-computacion-tm/scrabble-2023-ZorreroJoako.git
+3. Clone the repository using: -git clone https://github.com/um-computacion-tm/scrabble-2023-ZorreroJoako.git
 4. Navigate to the repository directory: cd /.../scrabble-2023-ZorreroJoako.git
-5. Build the Docker image: -docker build -t image_name .-  (In image name give it the name you want)
-6. Run the Docker image: -docker run -it image_name-
+5. Build the Docker image: `docker build -t image_name .`  (In image name give it the name you want)
+6. Run the Docker image: `docker run -it image_name`
 
 # Main 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/um-computacion-tm/scrabble-2023-ZorreroJoako/tree/main)
