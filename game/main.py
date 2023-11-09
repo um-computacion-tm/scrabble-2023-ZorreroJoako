@@ -136,13 +136,12 @@ class Main():
         orientation = input ("Ingrese la orientación (V/H): ").upper()
         if scrabble_game.board.validate_word_place_board(word, location, orientation):
             word = scrabble_game.board.words_with_accent(word)
-            horizontal = True if orientation == 'H' else False
-            # points = self.scrabble_game.board.calculate_word_value(word,location,horizontal)
+            points = scrabble_game.board.calculate_word_value(word,location,orientation=='H')
             if not scrabble_game.board.board_empty():
                 word = scrabble_game.board.get_word_without_intersections(word, location, orientation=='H')
             if scrabble_game.current_player.has_tiles(word):
                 tiles = scrabble_game.current_player.player_take_tiles(word)
-                # scrabble_game.current_player.score += points
+                scrabble_game.current_player.score += points
                 scrabble_game.board.put_word(tiles, location, orientation)
                 scrabble_game.current_player.add_tiles(scrabble_game.tilebag.take_tiles(len(word)))
                 scrabble_game.next_turn()

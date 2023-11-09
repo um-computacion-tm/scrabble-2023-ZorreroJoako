@@ -214,9 +214,9 @@ class Board:
         return 0
 
     def update_multipliers(self, cell, letter_value, word_multiplier, points, first):
-        if (cell.multiplier_type.lower() == 'w') and cell.activate:
+        if (cell.multiplier_type.lower() == 'word') and cell.activate:
             word_multiplier *= cell.multiplier
-        points += (letter_value * cell.multiplier) if cell.multiplier_type.lower() != 'l' and cell.activate else letter_value
+        points += (letter_value * cell.multiplier) if cell.multiplier_type.lower() == 'letter' and cell.activate else letter_value
         if first:
             cell.activate = False
         return word_multiplier, points
